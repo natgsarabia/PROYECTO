@@ -110,4 +110,42 @@ def regristrarUsuario():
 
 
 
+# TEST CASAS FLASK
+
+
+def obtener_preguntas_test(numero_preguntas=10):
+    cursor = mydb.cursor()
+    cursor.execute("SELECT * FROM TEST_Casas ORDER BY RAND() LIMIT %s", (numero_preguntas,))
+    preguntas = cursor.fetchall()
+    cursor.close()
+    return preguntas
+
+@app.route('/trivialHP', methods=["GET", "POST"])
+def jugar_hp():
+    if request.method == "GET":
+        preguntas = obtener_preguntas_test()
+        return render_template('trivial.html', preguntas=preguntas)
+    elif request.method == "POST":
+        pregunta_id = request.form.get("pregunta_id")
+        respuesta_seleccionada = request.form.get("respuesta")
+        actualizar_resultado(respuesta_seleccionada)
+        preguntas = obtener_preguntas_test()
+        return render_template('trivial.html', preguntas=preguntas)
+
+def actualizar_resultado(respuesta_seleccionada):
+    cursor = mydb.cursor()
+    cursor.execute(f"UPDATE resultados_hp_test SET total = total + 1 WHERE respuesta_correcta = '{respuesta_seleccionada}'")
+    mydb.commit()
+    cursor.close()
+
+@app.route('/calcular_casa', methods=["POST"])
+def calcular_casa():
+    casa = request.form.get("casa")
+    cursor = mydb.cursor()
+    cursor.execute(f"INSERT INTO estudiantes_casas (ID, CASA) VALUES (NULL, '{casa}')")
+    mydb.commit()
+    cursor.close()
+    return "Casa calculada con éxito."
+
+
 app.run()
