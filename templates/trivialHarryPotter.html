@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+
+</head>
+
+<body>
+    <header>
+        <h1>Trivial</h1>
+    </header>
+    <main>
+        
+        <div class="pregunta">
+            <p class="pregunta"><span id="pregunta">{{preguntaHtml}}</span></p>
+        </div>
+        <form action="{{ url_for('regristrarUsuario')}}" method="POST">
+            <input type="hidden" name="pregunta" value="{{ preguntaHtml }}">
+            <input type="radio" name="respuesta" value="{{respuesta1Html}}"/>{{respuesta1Html}}<br>
+            <input type="radio" name="respuesta" value="{{respuesta2Html}}"/>{{respuesta2Html}}<br>
+            <input type="radio" name="respuesta" value="{{respuesta3Html}}"/>{{respuesta3Html}}<br>
+            <input type="radio" name="respuesta" value="{{respuesta4Html}}"/>{{respuesta4Html}}<br>
+            <input type="submit" value="Enviar">
+        </form>
+       
+    </main>
+    <footer>
+        <p><b>Natalias &copy;</b></p>
+    </footer>
+
+</body>
+
+</html>
