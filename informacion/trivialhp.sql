@@ -82,3 +82,54 @@ INSERT INTO estudiantes_casas VALUES
 (2,'Hufflepuff',0),
 (3,'Ravenclaw',0),
 (4,'Slytherin',0);
+
+
+-- TEST CASAS
+
+
+CREATE TABLE IF NOT EXISTS TEST_Casas ( 
+	
+ID TINYINT(2) NOT NULL, 
+PREGUNTA VARCHAR(100) NOT NULL, 
+RESPUESTA_GRIFFINDOR VARCHAR(100) NOT NULL, 
+RESPUESTA_SLYTHERIN VARCHAR(100) NOT NULL, 
+RESPUESTA_RAVENCLAW VARCHAR(100) NOT NULL, 
+RESPUESTA_HUFFLEPUFF VARCHAR(100) NOT NULL, 
+PRIMARY KEY (ID) 
+); 
+
+INSERT INTO TEST_Casas (ID, PREGUNTA, RESPUESTA_GRIFFINDOR, RESPUESTA_SLYTHERIN, RESPUESTA_RAVENCLAW, RESPUESTA_HUFFLEPUFF) VALUES 
+(1,'¿Cuál de las siguientes opciones odiaría más que la gente lo llamara?',' Ordinario',' Ignorante',' Cobarde ',' Egoísta') 
+(2,'¿Que poción te gustaria formar?', 'Gloria', 'Sabiduría', 'Amor', 'Poder') 
+(3,'¿Cuál de las siguientes opciones te resultaria más difícil manejar?', 'Hambre', 'Frío', ' Soledad', 'Aburrimiento') 
+(4,'¿Qué es lo que más anhelas aprender en Hogwarts',' Magia',' Maleficios y hechizos',' criaturas mágicas',' Secretos') 
+(5,'Entras en un jardín encantado. ¿Qué sería lo más curioso de examinar?',' El árbol de hojas de plata',' Las setas rojas que hablan entre sí',' El estanque burbujeante ',' La estatua del viejo mago') 
+(6,'Te encuentras con un Dementor en el tren', 'Realizar el encantamiento Patronus', ' Esconderse', 'Analizar sus debilidades', 'Correr') 
+(7,'¿Cuál es tu cualidad más valorada?',' Valentía','Inteligencia','Lealtad','Astucia') 
+(8,'¿Que tipo de lugar prefieres?','Lugares emocionantes','Bibliotecas','Lugares acogedores','Lugares misteriosos') 
+(9,'¿Cual es tu mayor miedo?','Cobardia','Ignorancia','Traicion','Debilidad') 
+(10,'¿Que cualidad crees que te llevara al exito?','Valentia','Inteligencia','Lealtad','Ambicion') 
+(11,'¿Que hechizo te gustaria dominar a la perfeccion?','Expecto Patronum','Accio','Lumos','Expelliarmus') 
+(12,'¿Que materia te resultaria mas interesante?','Pociones','Adivinacion','Transformaciones','Criaturas magicas') 
+(13,'¿Cual seria tu lugar favorito para explorar?','El bosque prohibido','Masmorras de Hogwarts','La sala de los menesteres','Camara de los secretos') 
+(14,'¿Que tipo de desafios te emocionan mas?','Determinacion','ingenio ','lealtad','Astucia') 
+(15,'¿Como te enfrentarias a un enigma o acertijo?','Por intuicion','Busco pistas','Pregunto a otros','Por mi ingenio') 
+(16,'¿Cual seria tu objeto magico?','Capa de invisibilidad','Piedra de Resurreccion','Varita de Sauco','Giratiempo') 
+(17,'¿Cual es tu criatura magica favorita?','Dragon','Hipogrifo','Unicornio','Fenix') 
+(18,'¿Que tipo de magia te gustaria dominar?','Magia defensiva','Magia encantadora','Magia curativa','Magia oscura') 
+(19,'¿Que habilidad magica te gustaria desarrollar?','Leer mentes','Viajar en el tiempo','Transformarte','Volar sin escoba') 
+(20,'¿Que te atrae mas de la magia?','Crear ilusiones','Cambiar la realidad','Coneccion con el mundo espiritual','Superar los limites de la fisica') 
+(21,'¿Que te gustaria encontrar en la Sala de Menesteres?','Un tesoro','Lugar para practicar hechizos','Entrada secreta','Espejo que muestre tu deseo mas profundo') 
+(22,'¿Que te gustaria aprender de los magos mas poderosos?','Hazañas heroicas','Descubrimientos magicos','Dedicacion a la justicia','Poder y fama') 
+(23,'¿Que lugares te gustaria asistir?','Bosque prohibido','Callejon Diagon','Madriguera Weasley','Partido de Quidditch profesional') 
+(24,'¿Que te gustaria aprender de Dumbledore?','Amistad','Compasion','Magia antigua','Estrategias de pelea') 
+(25,'¿Cual es tu casa favorita?','Griffindor','Ravenclaw','Hufflepuff','Slytherin') 
+(26,'¿Que objeto te gustaria encontrar?','Espada','Mapa del merodeador','Piedra filosofal','Anillo de los Gaunt') 
+(27,'¿En que departamento te gustaria trabajar?','Misterios','Control de Criaturas Magicas','Seguridad Magica','Deportes y jegos magicos') 
+(28,'¿Que es lo que mas te gusta de Hogwarts?','Clases de vuelo','Pasillos secretos','Salas comunes','Competencias de Quidditch') 
+(29,'¿Que te impresiona de Dumbledore?','Su sabiduria','Su comprension','Su valentia','Su liderazgo') 
+(30,'¿Cual es tu planta magica favorita?','Mandragora','Tentacula venenosa','Mimbulus Mimbletonia','Flor de fuego') 
+(31,'¿Que te emociona de una batalla de Hogwarts?','Valentia de profesores y estudiantes','Estrategia de resistencia','Intervencion de criaturas magicas','Derrota final del bando opuesto') 
+ 
+INSERT INTO estudiantes_casas (ID, CASA) VALUES 
+(1, 'Gryffindor'), (2, 'Hufflepuff'), (3, 'Ravenclaw'), (4, 'Slytherin'); 
