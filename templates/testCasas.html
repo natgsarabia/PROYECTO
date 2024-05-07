@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Test de Casas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="C:\Users\Nati\Desktop\Big data Albert\Trabajos\PROYECTO_3\Flask_casas\static\casas.css">
+    <link href="https://fonts.cdnfonts.com/css/harry-p" rel="stylesheet">
 </head>
-
-<body>
+<body class="background-container">
     <header>
         <nav class="navbar navbar-expand-lg" >
             <div class="container-fluid">
@@ -17,35 +17,53 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle subtitle"   data-bs-toggle="dropdown" aria-expanded="false">
-                                <a class="text" href="C:\Users\Nati\Desktop\Big data Albert\Trabajos\PROYECTO_3\Flask_casas\templates\index.html">INICIO</a>
-                                <img src="https://github.com/natgsarabia/PROYECTO/blob/main/assets/snitch.gif?raw=true" height="90px">  
+                                <img src="https://raw.githubusercontent.com/natgsarabia/PROYECTO/main/assets/snitch.gif" height="90px">  
                             </a>
-                                <ul class="dropdown-menu ">
-                                    <li>
-                                        <a class="dropdown-item articles" href="{{ url_for('trivialHP') }}">Trivial Harry Potter</a>
-                                        <a class="dropdown-item articles" href="C:\Users\Nati\Desktop\Big data Albert\Trabajos\PROYECTO_3\Flask_casas\templates\testCasas.html">Descubre a qué casa perteneces</a>
-                                        <a class="dropdown-item articles" href="{{ url_for('') }}">Nuestros estudiantes</a>  
-                                    </li>
-                                </ul>
+                            <ul class="dropdown-menu ">
+                                <li>
+                                    <a class="dropdown-item articles" href="{{ url_for('trivialHP') }}">Trivial Harry Potter</a>
+                                    <a class="dropdown-item articles" href="{{ url_for('testCasas') }}">Descubre a que casa perteneces</a>
+                                    <a class="dropdown-item articles" href="{{ url_for('estudiantesCasas') }}">Nuestros estudiantes</a>  
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <p ><img  src="https://github.com/natgsarabia/PROYECTO/blob/main/assets/logo.png?raw=true" height="150px" width="150px" alt="First slide"></p>
+              </div>             
+            </div>
+          </div>
     </header>
+
+
     <main>
+        <h1>Test de Casas de Hogwarts</h1>
         
-        <div>
-            <h1>¿A Que casa perteneces?</h1>
-        </div>
-        <form action="/jugar_hp/{{ usuario}}" method="GET">
-            <input type="submit" value="Enviar">
-        </form>
-        
+    <form action="/jugar_test" method="POST">
+        {% for pregunta in preguntas %}
+        <h3>{{ pregunta[1] }}</h3> 
+        <input type="hidden" name="pregunta_id" value="{{ pregunta[0] }}"> 
+        <input type="radio" name="respuesta" value="{{ pregunta[2] }}">{{ pregunta[2] }}<br> 
+        <input type="radio" name="respuesta" value="{{ pregunta[3] }}">{{ pregunta[3] }}<br> 
+        <input type="radio" name="respuesta" value="{{ pregunta[4] }}">{{ pregunta[4] }}<br> 
+        <input type="radio" name="respuesta" value="{{ pregunta[5] }}">{{ pregunta[5] }}<br> 
+        {% endfor %}
+        <button type="submit">Enviar</button>
+    </form>
+       
     </main>
     <footer>
-        <p><b>Natalias &copy;</b></p>
+        <p><b>Natalia's &copy;</b></p>
     </footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
 </body>
 
