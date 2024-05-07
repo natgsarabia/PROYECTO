@@ -90,10 +90,10 @@ INSERT INTO estudiantes_casas VALUES
 CREATE TABLE IF NOT EXISTS porcentajeCasas (
 
 	'id' TINYINT(2) NOT NULL,
-	Griffindor int(100) NOT NULL,
-	Hufflepuff int (100) NOT NULL,
-	Ravenclaw int (100) NOT NULL,
-	Slytherin int (100) NOT NULL
+	GRIFFINDOR int(100) NOT NULL,
+	HUFFLEPUFF int (100) NOT NULL,
+	RAVENCLAW int (100) NOT NULL,
+	SLYTHERIN int (100) NOT NULL
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS TEST_Casas ( 
