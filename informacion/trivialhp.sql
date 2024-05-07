@@ -92,16 +92,16 @@ CREATE TABLE IF NOT EXISTS TEST_Casas (
 ID TINYINT(2) NOT NULL, 
 PREGUNTA VARCHAR(100) NOT NULL, 
 RESPUESTA_GRIFFINDOR VARCHAR(100) NOT NULL, 
-RESPUESTA_SLYTHERIN VARCHAR(100) NOT NULL, 
-RESPUESTA_RAVENCLAW VARCHAR(100) NOT NULL, 
 RESPUESTA_HUFFLEPUFF VARCHAR(100) NOT NULL, 
+RESPUESTA_RAVENCLAW VARCHAR(100) NOT NULL, 
+RESPUESTA_SLYTHERIN VARCHAR(100) NOT NULL, 
 PRIMARY KEY (ID) 
 ); 
 
-INSERT INTO TEST_Casas (ID, PREGUNTA, RESPUESTA_GRIFFINDOR, RESPUESTA_SLYTHERIN, RESPUESTA_RAVENCLAW, RESPUESTA_HUFFLEPUFF) VALUES 
-(1,'¿Cuál de las siguientes opciones odiaría más que la gente lo llamara?',' Ordinario',' Ignorante',' Cobarde ',' Egoísta') 
-(2,'¿Que poción te gustaria formar?', 'Gloria', 'Sabiduría', 'Amor', 'Poder') 
-(3,'¿Cuál de las siguientes opciones te resultaria más difícil manejar?', 'Hambre', 'Frío', ' Soledad', 'Aburrimiento') 
+INSERT INTO TEST_Casas (ID, PREGUNTA, RESPUESTA_GRIFFINDOR, RESPUESTA_HUFFLEPUFF, RESPUESTA_RAVENCLAW, RESPUESTA_SLYTHERIN) VALUES 
+(1,'¿Cuál de las siguientes opciones odiaría más que la gente lo llamara?',' Cobarde',' Ignorante',' Egoísta ',' Ordinario') 
+(2,'¿Que poción te gustaria formar?', 'Sabiduría', 'Amor', 'Gloria', 'Poder') 
+(3,'¿Cuál de las siguientes opciones te resultaria más difícil manejar?', 'Soledad', 'Frío', ' Hambre', 'Aburrimiento') 
 (4,'¿Qué es lo que más anhelas aprender en Hogwarts',' Magia',' Maleficios y hechizos',' criaturas mágicas',' Secretos') 
 (5,'Entras en un jardín encantado. ¿Qué sería lo más curioso de examinar?',' El árbol de hojas de plata',' Las setas rojas que hablan entre sí',' El estanque burbujeante ',' La estatua del viejo mago') 
 (6,'Te encuentras con un Dementor en el tren', 'Realizar el encantamiento Patronus', ' Esconderse', 'Analizar sus debilidades', 'Correr') 
