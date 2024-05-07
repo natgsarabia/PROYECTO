@@ -36,9 +36,9 @@ header{
     margin-bottom: 50px;
 }
 body{ 
-    
+    size: 1000px;
     background-repeat: no-repeat;
-    background-image: url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/fondo.jpg") ;
+    background-image: url("https://www.xtrafondos.com/wallpapers/resoluciones/23/hogwarts-harry-potter_2560x1440_11461.jpg") ;
     background-size: cover;
     background-position: center ;
     backdrop-filter:blur(10px);
