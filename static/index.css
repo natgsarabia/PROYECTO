@@ -1,0 +1,83 @@
+html,body{
+    margin:0;
+    padding:o;
+}
+
+
+.dropdown-toggle::after{
+    display: none
+}
+
+.dropdown-toggle img{
+    cursor: pointer;
+}
+
+header{
+    background-color:#272D2E; 
+    background-image: url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/fondo2.gif") ; 
+    background-position: center 25%; 
+    background-size: cover;
+    
+}
+.dropdown-menu{
+    background-color: #FcDEBE;
+    color:#272D2E;
+    font-family: "HARRYP_";
+     
+}
+
+.carousel-item{
+    text-align: center;
+    margin-bottom: 50px;
+}
+body{ 
+    background-repeat: no-repeat;
+    background-image: url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/fondo.jpg") ;
+    background-size: cover;
+    background-position: center top 220px;
+    backdrop-filter:blur(10px);
+}
+main{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.wraps{
+    
+    display: flex;
+    flex-direction: column;  
+   
+}
+.accordion{
+    margin-top: 80px;
+    align-items: center;
+    
+}
+.accordion-item{
+    width: 650px;
+    height: 150px;
+    background-color: #FcDEBE;
+}
+.accordion-header{
+    text-align: justify;
+    color: #272D2E;
+    font-size: 20px;
+    
+}
+.buttonAccordion{  
+    background-color: #272D2E;
+    width: 250px;
+    height: 70px;
+    margin-top: -10px;
+
+}
+
+
+
+@font-face{
+    font-family:"HARRYP__ ";
+    src:url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/fonts/HARRYP__.TTF") format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}

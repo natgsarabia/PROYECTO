@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/static/index.css">
+</head>
+<body class="background-container">
+    <header>
+        <nav class="navbar navbar-expand-lg" >
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle subtitle"   data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/snitch.gif" height="90px">  
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li>
+                                    <a class="dropdown-item articles" href="{{ url_for('trivialHP') }}">Trivial Harry Potter</a>
+                                    <a class="dropdown-item articles" href="{{ url_for('') }}">Descubre a qué casa perteneces</a>
+                                    <a class="dropdown-item articles" href="{{ url_for('') }}">Nuestros estudiantes</a>  
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <p ><img  src="file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/logo.png" height="150px" width="150px" alt="First slide"></p>
+              </div>             
+            </div>
+          </div>
+    </header>
+    <main>
+        <div class="wraps" style="background-color:transparent; border: 0cap;">
+            <div class="accordion" style="width: 18rem;">
+                <div class="accordion-item">
+                  <p class="accordion-header">¿Quieres poner a prueba tus conocimientos sobre el mundo mágico?<br>Descubre que tan muggle eres con este test.</p>
+                </div>
+                <div class="card-link">
+                    <button class="buttonAccordion" href="{{ url_for('trivialHP') }}" class="btn" type="button" style="color: #FcDEBE; font-size: 20px;">Trivial Harry Potter</button>
+                </div>
+            </div>
+            <div class="accordion" style="width: 18rem;">
+                <div class="accordion-item">
+                  <p class="accordion-header">¿Leal cómo Helga Hufflepuff, inteligente como Rowena Ravenclaw, ambicioso como Salazar Slytherin o valiente como Godric Gryffindor?</p>
+                </div>
+                <div class="card-link">
+                    <button class="buttonAccordion" href="#" class="btn" type="button" style="color: #FcDEBE; font-size: 20px;">TEST: ¿Cúal es tu casa?</button>
+                </div>
+            </div>
+            <div class="accordion" style="width: 18rem;">
+                <div class="accordion-item">
+                  <p class="accordion-header">Mira nuestro contador de estudiantes para saber cuantos hay en cada una.<br>¿Qué casa tendrá más aprendices de mago?</p>
+                </div>
+                
+                <button class="buttonAccordion" href="#" class="btn" type="button" style="color: #FcDEBE; font-size: 20px;">Nuestros estudiantes</button>
+                
+            </div>
+        </div>
+ 
+    </main>
+    <footer>
+        <p><b>Natalias &copy;</b></p>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
