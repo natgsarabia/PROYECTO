@@ -89,7 +89,7 @@ INSERT INTO estudiantes_casas VALUES
 
 CREATE TABLE IF NOT EXISTS porcentajeCasas (
 
-	'id' TINYINT(2) NOT NULL,
+	id TINYINT(2) NOT NULL,
 	Griffindor int(100) NOT NULL,
 	Hufflepuff int (100) NOT NULL,
 	Ravenclaw int (100) NOT NULL,
@@ -97,16 +97,16 @@ CREATE TABLE IF NOT EXISTS porcentajeCasas (
 	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS TEST_Casas ( 
-	ID TINYINT(2) NOT NULL, 
-	PREGUNTA VARCHAR(100) NOT NULL, 
-	RESPUESTA_GRIFFINDOR VARCHAR(100) NOT NULL, 
-	RESPUESTA_HUFFLEPUFF VARCHAR(100) NOT NULL, 
-	RESPUESTA_RAVENCLAW VARCHAR(100) NOT NULL, 
-	RESPUESTA_SLYTHERIN VARCHAR(100) NOT NULL, 
+	id TINYINT(2) NOT NULL, 
+	pregunta VARCHAR(100) NOT NULL, 
+	respuesta_griffindor VARCHAR(100) NOT NULL, 
+	respuesta_hufflepuff VARCHAR(100) NOT NULL, 
+	respuesta_ravenclaw VARCHAR(100) NOT NULL, 
+	respuesta_slytherin VARCHAR(100) NOT NULL, 
 	PRIMARY KEY (ID) 
 ); 
 
-INSERT INTO TEST_Casas (ID, PREGUNTA, RESPUESTA_GRIFFINDOR, RESPUESTA_HUFFLEPUFF, RESPUESTA_RAVENCLAW, RESPUESTA_SLYTHERIN) VALUES 
+INSERT INTO TEST_Casas (id, pregunta, respuesta_griffindor, respuesta_hufflepuff, respuesta_ravenclaw, respuesta_slytherin) VALUES 
 (1,'¿Cuál de las siguientes opciones odiaría más que la gente lo llamara?',' Cobarde',' Ignorante',' Egoísta ',' Ordinario') 
 (2,'¿Que poción te gustaria formar?', 'Sabiduría', 'Amor', 'Gloria', 'Poder') 
 (3,'¿Cuál de las siguientes opciones te resultaria más difícil manejar?', 'Soledad', 'Frío', ' Hambre', 'Aburrimiento') 
