@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEST</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="C:\Users\Nati\Desktop\Big data Albert\Trabajos\PROYECTO_3\Flask_casas\static\casas.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg" >
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle subtitle"   data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="text" href="C:\Users\Nati\Desktop\Big data Albert\Trabajos\PROYECTO_3\Flask_casas\templates\index.html">INICIO</a>
+                                <img src="https://github.com/natgsarabia/PROYECTO/blob/main/assets/snitch.gif?raw=true" height="90px">  
+                            </a>
+                                <ul class="dropdown-menu ">
+                                    <li>
+                                        <a class="dropdown-item articles" href="{{ url_for('trivialHP') }}">Trivial Harry Potter</a>
+                                        <a class="dropdown-item articles" href="C:\Users\Nati\Desktop\Big data Albert\Trabajos\PROYECTO_3\Flask_casas\templates\testCasas.html">Descubre a qué casa perteneces</a>
+                                        <a class="dropdown-item articles" href="{{ url_for('') }}">Nuestros estudiantes</a>  
+                                    </li>
+                                </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        
+        <div>
+            <h1>¿A Que casa perteneces?</h1>
+        </div>
+        <form action="/jugar_hp/{{ usuario}}" method="GET">
+            <input type="submit" value="Enviar">
+        </form>
+        
+    </main>
+    <footer>
+        <p><b>Natalias &copy;</b></p>
+    </footer>
+
+</body>
+
+</html>
