@@ -4,27 +4,30 @@ import random
 
 
 
-def pedirPreguntasTrivialhp():
+def pedirPreguntasTrivialhp(numero_preguntas=10):
     bd=mysql.connect(user="root",password="",host="127.0.0.1",
                      database="trivialhp")
     cursor=bd.cursor()
-    query="SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp`;"
-    cursor.execute(query)
-    listaPreguntas=cursor.fetchall()
+    cursor.execute("SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp`LIMIT %s;", (numero_preguntas,))
+    listaPreguntas = cursor.fetchall()
+    cursor.close()
     bd.close()
     return listaPreguntas
-
+    
+   
+   
 def obtenerPreguntaTrivialhp():
     listadoPreguntas=pedirPreguntasTrivialhp()
-    preguntasRandom=random.choice(listadoPreguntas)
-    pregunta=preguntasRandom[0]
-    respuestas= [preguntasRandom[1],preguntasRandom[2],preguntasRandom[3],preguntasRandom[4]]
-    random.shuffle(respuestas)
-    respuesta1= respuestas[0]
-    respuesta2=respuestas[1]
-    respuesta3=respuestas[2]
-    respuesta4=respuestas[3]
-    return pregunta,respuesta1,respuesta2,respuesta3,respuesta4
+    for i in range(listadoPreguntas.Length):
+        preguntaRandom=listadoPreguntas[i]
+        pregunta=preguntaRandom[0]
+        respuestas= [preguntaRandom[1],preguntaRandom[2],preguntaRandom[3],preguntaRandom[4]]
+        random.shuffle(respuestas)
+        respuesta1= respuestas[0]
+        respuesta2=respuestas[1]
+        respuesta3=respuestas[2]
+        respuesta4=respuestas[3]
+        return pregunta,respuesta1,respuesta2,respuesta3,respuesta4
 
 def comprobarResultadoTrivialhp(pregunta,respuestaUsuario):
     bd=mysql.connect(user="root",password="",host="127.0.0.1",
@@ -166,5 +169,9 @@ def calcular_casa():
     bd.commit()
     cursor.close()
     return "Casa calculada con éxito."
+
+@app.route('/estudiantesCasas',methods=["GET","POST"])
+def calculasEstudiantes():
+    return
 
 app.run()

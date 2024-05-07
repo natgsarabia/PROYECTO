@@ -1,0 +1,73 @@
+html{
+    margin-top: 0%;
+    padding: 0%;
+    size: 1000px;
+}
+
+
+.dropdown-toggle::after{
+    display: none
+}
+
+.dropdown-toggle img{
+    cursor: pointer;
+}
+
+header{
+    background-color:#272D2E; 
+    background-image: url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/fondo2.gif") ;   
+    background-size: cover;
+    opacity: 0.7;
+    margin-top: -30px;
+    
+    
+}
+.dropdown-menu{
+    background-color: #FcDEBE;
+    color:#272D2E;
+    font-family: "HARRYP_";
+     
+}
+.carousel{
+    margin-bottom: 60px;
+}
+.carousel-item{
+    text-align: center;
+    margin-bottom: 50px;
+}
+body{ 
+    
+    background-repeat: no-repeat;
+    background-image: url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/fondo.jpg") ;
+    background-size: cover;
+    background-position: center ;
+    backdrop-filter:blur(10px);
+    margin-top:0;
+    padding: 0%;
+}
+main{
+    height: 700px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+footer{
+    color: #FcDEBE;
+    background-color:#272D2E;
+    font-family: "HARRYP_";
+    position: bottom;
+    text-align:  center;
+    margin-top: 40px;
+    margin-bottom: -15px;
+    height: 50px;
+     
+}
+
+@font-face{
+    font-family:"HARRYP__ ";
+    src:url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/fonts/HARRYP__.TTF") format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
