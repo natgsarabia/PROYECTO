@@ -19,14 +19,18 @@ header{
     background-size: cover;
     opacity: 0.5;
     margin-top: -30px;
-    
-    
 }
+
 .dropdown-menu{
     background-color: #FcDEBE;
-    color:#272D2E;
-    font-family: "HARRYP_";
-     
+    color:#272D2E;  
+    font-size: large;
+    font-weight: bolder;
+    font-size: 200%;
+}
+
+.navbar{
+    font-family: 'Harry P';
 }
 .carousel{
     margin-bottom: 60px;
@@ -67,6 +71,7 @@ main{
     justify-content:end;
     opacity: 0.85;
     
+    
 }
 .pregunta{
     color: #272D2E;
@@ -76,14 +81,24 @@ main{
     width: 900px;
     backdrop-filter:blur(5px); 
     border-radius: 45%;
+    font-family: 'Harry P';
+    
 }
 .solicitarNombre{
     margin-top: 30px;
     font-size: 60px;
     font-weight: bolder;
+    
 }
 .imagen{
     margin-top: -30px;
+}
+.button{
+    background-color:#272D2E; 
+    color: #FcDEBE; 
+    border-radius: 50%; 
+    font-size: 20px;
+    font-family: 'Harry P';
 }
 
 
