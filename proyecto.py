@@ -176,7 +176,7 @@ def calcular_casa():
     
 
 @app.route('/estudiantesCasas',methods=["GET","POST"])
-def calculasEstudiantes():
+def calcularEstudiantes():
     return
 
 
@@ -212,10 +212,6 @@ def mostrarPorcentaje():
     porcentajes = cursor.fetchone()
     bd.close()
     return render_template('porcentajeCasas.html', porcentajes=porcentajes)
-
-@app.route('/porcentajeCasas')
-def porcentajeCasas():
-    return mostrarPorcentaje()
 
 
 app.run()

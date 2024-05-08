@@ -19,8 +19,7 @@ header{
     background-size: cover;
     opacity: 0.5;
     margin-top: -30px;
-    
-    
+      
 }
 .dropdown-menu{
     background-color: #FcDEBE;
@@ -44,7 +43,12 @@ body{
     backdrop-filter:blur(10px);
     margin-top:0;
     padding: 0%;
+    font-family: 'Harry P', sans-serif;  
 }
+
+@import url('https://fonts.cdnfonts.com/css/harry-p');
+
+
 main{
     height: 700px;
     display:flex;

@@ -23,6 +23,26 @@ CREATE TABLE `estudiantes_casas`(
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+CREATE TABLE IF NOT EXISTS porcentaje_Casas (
+    id TINYINT(2) NOT NULL AUTO_INCREMENT,
+    Griffindor FLOAT NOT NULL,
+    Hufflepuff FLOAT NOT NULL,
+    Ravenclaw FLOAT NOT NULL,
+    Slytherin FLOAT NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS TEST_Casas ( 
+	id TINYINT(2) NOT NULL, 
+	pregunta VARCHAR(100) NOT NULL, 
+	respuesta_griffindor VARCHAR(100) NOT NULL, 
+	respuesta_hufflepuff VARCHAR(100) NOT NULL, 
+	respuesta_ravenclaw VARCHAR(100) NOT NULL, 
+	respuesta_slytherin VARCHAR(100) NOT NULL, 
+	PRIMARY KEY (ID) 
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
  
 INSERT INTO Trivial_preguntas_generales_HP VALUES
 (1,'¿Cómo se llaman los padres de Harry Potter?','James y Lilly','Jhon y Lilly', 'Robert y Martha','James y Lissie'),
@@ -61,7 +81,7 @@ INSERT INTO Trivial_preguntas_generales_HP VALUES
 (34,' ¿En qué calle de Inglaterra vive la família de los Dursley?', 'Nº4 Privet Drive', 'Nº10 Abbey Road', 'Nº34 Leicester Square', 'Nº56 Lombard Street'),
 (35,'¿Qué planta ingiere Harry Potter en el lago negro para poder respirar bajo el agua en el torneo de los tres magos?', 'Branquialgas', 'Asfódelo', 'Acónito', 'Bubotubérculo'),
 (36,'¿Qué nombre recibe el perro guardián de 3 cabezas?', 'Fluffy', 'Goofy', 'Puffy', 'Max'),
-(37,'¿Qué instrumento mágico mantiene dormido al perro guardián de 3 cabezas?', 'Un arpa mágica', 'Una arpa mágica', 'Una radio', 'Un ukelele mágico'),
+(37,'¿Qué instrumento mágico mantiene dormido al perro guardián de 3 cabezas?', 'Un arpa mágica', 'Una flauta mágica', 'Una radio', 'Un ukelele mágico'),
 (38,'¿Cuántas escaleras tiene Hogwarts?', '142', '256', '77', '108'),
 (39,'¿Qué se obtiene al ingerir la pócima Felix Felicis?', 'Tienes suerte durante 24 horas', 'Felicidad máxima', 'La muerte', 'Puedes transformarte en la persona que quieras'),
 (40,'¿Cuál de los siguientes NO es un Horrocrux de Voldemort?', 'El espejo de Oesed', 'Un guardapelo', 'Nagini', 'Harry Potter'),
@@ -84,27 +104,10 @@ INSERT INTO estudiantes_casas VALUES
 (4,'Slytherin',0);
 
 
+
 -- TEST CASAS
 
 
-CREATE TABLE IF NOT EXISTS porcentaje_Casas (
-    id TINYINT(2) NOT NULL AUTO_INCREMENT,
-    Griffindor FLOAT NOT NULL,
-    Hufflepuff FLOAT NOT NULL,
-    Ravenclaw FLOAT NOT NULL,
-    Slytherin FLOAT NOT NULL,
-    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-CREATE TABLE IF NOT EXISTS TEST_Casas ( 
-	id TINYINT(2) NOT NULL, 
-	pregunta VARCHAR(100) NOT NULL, 
-	respuesta_griffindor VARCHAR(100) NOT NULL, 
-	respuesta_hufflepuff VARCHAR(100) NOT NULL, 
-	respuesta_ravenclaw VARCHAR(100) NOT NULL, 
-	respuesta_slytherin VARCHAR(100) NOT NULL, 
-	PRIMARY KEY (ID) 
-); 
 
 INSERT INTO TEST_Casas (id, pregunta, respuesta_griffindor, respuesta_hufflepuff, respuesta_ravenclaw, respuesta_slytherin) VALUES 
 (1,'¿Cuál de las siguientes opciones odiaría más que la gente lo llamara?',' Cobarde',' Ignorante',' Egoísta ',' Ordinario') ,
@@ -137,4 +140,4 @@ INSERT INTO TEST_Casas (id, pregunta, respuesta_griffindor, respuesta_hufflepuff
 (28,'¿Que es lo que mas te gusta de Hogwarts?','Clases de vuelo','Pasillos secretos','Salas comunes','Competencias de Quidditch') ,
 (29,'¿Que te impresiona de Dumbledore?','Su sabiduria','Su comprension','Su valentia','Su liderazgo') ,
 (30,'¿Cual es tu planta magica favorita?','Mandragora','Tentacula venenosa','Mimbulus Mimbletonia','Flor de fuego') ,
-(31,'¿Que te emociona de una batalla de Hogwarts?','Valentia de profesores y estudiantes','Estrategia de resistencia','Intervencion de criaturas magicas','Derrota final del bando opuesto') ,
+(31,'¿Que te emociona de una batalla de Hogwarts?','Valentia de profesores y estudiantes','Estrategia de resistencia','Intervencion de criaturas magicas','Derrota final del bando opuesto') 

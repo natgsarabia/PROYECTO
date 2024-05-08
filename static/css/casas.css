@@ -1,3 +1,40 @@
+html{
+    margin-top: 0%;
+    padding: 0%;
+    size: 1000px;
+}
+
+
+.dropdown-toggle::after{
+    display: none
+}
+
+.dropdown-toggle img{
+    cursor: pointer;
+}
+
+header{
+    background-color:#272D2E; 
+    background-image: url("/static/assets/fondo2.gif")  ;   
+    background-size: cover;
+    opacity: 0.5;
+    margin-top: -30px;
+      
+}
+.dropdown-menu{
+    background-color: #FcDEBE;
+    color:#272D2E;
+    font-family: "HARRYP_";
+     
+}
+.carousel{
+    margin-bottom: 60px;
+}
+.carousel-item{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 body{ 
     background-repeat: no-repeat;
     background-image: url("https://fotografias.antena3.com/clipping/cmsimages01/2017/03/06/886FAAD6-44E3-4E06-AC03-C4F3FF479857/98.jpg?crop=1335,751,x0,y0&width=1900&height=1069&optimize=high&format=webply") ;
