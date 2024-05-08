@@ -1,6 +1,7 @@
-html,body{
-    margin:0;
-    padding:o;
+html{
+    margin-top: 0%;
+    padding: 0%;
+    size: 1000px;
 }
 
 
@@ -14,9 +15,11 @@ html,body{
 
 header{
     background-color:#272D2E; 
-    background-image: url("file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/fondo2.gif") ; 
-    background-position: center 25%; 
+    background-image: url("/static/assets/fondo2.gif") ;   
     background-size: cover;
+    opacity:0.5;
+    margin-top: -30px;
+    
     
 }
 .dropdown-menu{
@@ -25,18 +28,23 @@ header{
     font-family: "HARRYP_";
      
 }
-
+.carousel{
+    margin-bottom: 60px;
+}
 .carousel-item{
     text-align: center;
     margin-bottom: 50px;
 }
 body{ 
+    size: 1000px;
     background-repeat: no-repeat;
     background-image: url("https://www.xtrafondos.com/wallpapers/resoluciones/23/hogwarts-harry-potter_2560x1440_11461.jpg") ;
     background-size: cover;
-    background-position: center top 220px;
-    backdrop-filter:blur(5px);
-    background-repeat: no-repeat;
+    background-position: center ;
+    backdrop-filter:blur(10px);
+    margin-top:0;
+    padding: 0%;
+
 }
 main{
     display:flex;
@@ -47,34 +55,51 @@ main{
 .wraps{
     
     display: flex;
-    flex-direction: column;  
+    flex-direction: column; 
+    align-items: center;
+    text-align: center; 
    
 }
 .accordion{
-    margin-top: 80px;
-    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
     
 }
 .accordion-item{
-    width: 650px;
-    height: 150px;
-    background-color: #FcDEBE;
+    width: 500px;
+    height: 120px;
+    background-repeat: no-repeat;
+    background-image: url("/static/assets/fondoAccordionItem.jpg") ;
+    background-size: 550px;
+    background-position: center ;
 }
 .accordion-header{
-    text-align: justify;
+    text-align: justify, center;
     color: #272D2E;
-    font-size: 20px;
+    font-size: 15px;
+    margin:20px;
     
 }
 .buttonAccordion{  
     background-color: #272D2E;
     width: 250px;
     height: 70px;
-    margin-top: -10px;
+    margin-top: -25px;
 
 }
 
-
+footer{
+    color: #FcDEBE;
+    background-color:#272D2E;
+    font-family: "HARRY P";
+    position: bottom;
+    text-align:  center;
+    margin-top: 40px;
+    margin-bottom: -15px;
+    height: 50px;  
+    font-size: 30px;  
+}
 
 @font-face{
     font-family:"HARRYP__ ";
