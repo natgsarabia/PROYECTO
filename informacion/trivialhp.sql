@@ -42,6 +42,14 @@ CREATE TABLE IF NOT EXISTS TEST_Casas (
 	PRIMARY KEY (ID) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE respuestas_casas (
+    id TINYINT(2) NOT NULL AUTO_INCREMENT,
+    pregunta_id TINYINT(2),
+    opcion_seleccionada VARCHAR(50),
+    PRIMARY KEY (id),
+    FOREIGN KEY (pregunta_id) REFERENCES TEST_Casas(id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
  
 INSERT INTO Trivial_preguntas_generales_HP VALUES
