@@ -20,7 +20,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle subtitle"   data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://raw.githubusercontent.com/natgsarabia/PROYECTO/main/assets/snitch.gif" height="90px">  
+                                <img src="{{ url_for('static', filename='/assets/snitch.gif') }}" height="90px">  
                             </a>
                             <ul class="dropdown-menu ">
                                 <li>
@@ -38,7 +38,7 @@
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <p ><img  src="https://github.com/natgsarabia/PROYECTO/blob/main/assets/logo.png?raw=true" height="150px" width="150px" alt="First slide"></p>
+                <p ><img  src="{{ url_for('static', filename='/assets/logo.png') }}" height="150px" width="150px" alt="First slide"></p>
               </div>             
             </div>
           </div>
@@ -46,19 +46,32 @@
 
 
     <main>
-        <h1>Test de Casas de Hogwarts</h1>
+        <h1>A que casa perteneces?</h1>
         
-    <form action="/jugar_test" method="POST">
-        {% for pregunta in preguntas %}
-        <h3>{{ pregunta[1] }}</h3> 
-        <input type="hidden" name="pregunta_id" value="{{ pregunta[0] }}"> 
-        <input type="radio" name="respuesta" value="{{ pregunta[2] }}">{{ pregunta[2] }}<br> 
-        <input type="radio" name="respuesta" value="{{ pregunta[3] }}">{{ pregunta[3] }}<br> 
-        <input type="radio" name="respuesta" value="{{ pregunta[4] }}">{{ pregunta[4] }}<br> 
-        <input type="radio" name="respuesta" value="{{ pregunta[5] }}">{{ pregunta[5] }}<br> 
-        {% endfor %}
+    <form action="/testCasas" method="POST">
+        <div>
+            <p>{{ pregunta }}</p>
+            <input type="hidden" name="pregunta_id" value="{{ pregunta_id }}">
+            <div class="option">
+                <input type="radio" name="respuesta" value="Griffindor" id="griffindor">
+                <label for="griffindor">{{ opciones_respuestas[0] }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="respuesta" value="Hufflepuff" id="hufflepuff">
+                <label for="hufflepuff">{{ opciones_respuestas[1] }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="respuesta" value="Ravenclaw" id="ravenclaw">
+                <label for="ravenclaw">{{ opciones_respuestas[2] }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="respuesta" value="Slytherin" id="slytherin">
+                <label for="slytherin">{{ opciones_respuestas[3] }}</label>
+            </div>
+        </div>
         <button type="submit">Enviar</button>
     </form>
+    
        
 
     </main>
