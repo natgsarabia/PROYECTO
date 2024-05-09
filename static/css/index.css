@@ -19,8 +19,7 @@ header{
     background-size: cover;
     opacity:0.5;
     margin-top: -30px;
-    
-    
+      
 }
 .dropdown-menu{
     background-color: #FcDEBE;
@@ -72,7 +71,7 @@ main{
 }
 .accordion-item{
     width: 500px;
-    height: 120px;
+    height: 150px;
     background-repeat: no-repeat;
     background-image: url("/static/assets/fondoAccordionItem.jpg") ;
     background-size: 550px;
@@ -81,8 +80,8 @@ main{
 .accordion-header{
     text-align: justify, center;
     color: #272D2E;
-    font-family: 'Tundra', sans-serif;
-    margin:20px;
+    font-family: 'Qilla', sans-serif;
+    margin:30px;
     
 }
 .card-link{
@@ -91,11 +90,12 @@ main{
 
 .buttonAccordion {  
     background-color: #272D2E;
-    width: 250px;
-    height: 70px;
-    margin-top: -25px;
+    width: 290px;
+    height: 80px;
+    margin-top: -35px;
     font-family: 'Harry P', sans-serif;
     color:#FcDEBE;
+    font-size: 30px;
 }
 
 
@@ -111,6 +111,6 @@ footer{
     font-size: 35px;  
 }
 
-@import url('https://fonts.cdnfonts.com/css/tundra');
+
 @import url('https://fonts.cdnfonts.com/css/harry-p');
 

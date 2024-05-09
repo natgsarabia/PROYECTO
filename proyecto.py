@@ -1,6 +1,10 @@
-from flask import Flask,render_template,request,redirect,url_for
+from flask import Flask,render_template,request,redirect,url_for, session, Response
 import mysql.connector as mysql
 import random
+import io
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 
@@ -8,7 +12,7 @@ def pedirPreguntasTrivialhp(numero_preguntas=10):
     bd=mysql.connect(user="root",password="",host="127.0.0.1",
                      database="trivialhp")
     cursor=bd.cursor()
-    cursor.execute("SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp`LIMIT %s;", (numero_preguntas,))
+    cursor.execute("SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp` ORDER BY RAND() LIMIT %s;", (numero_preguntas,))
     listaPreguntas = cursor.fetchall()
     cursor.close()
     bd.close()
@@ -16,12 +20,9 @@ def pedirPreguntasTrivialhp(numero_preguntas=10):
     
    
    
-def obtenerPreguntaTrivialhp():
-    listadoPreguntas=pedirPreguntasTrivialhp()
-    for i in range(listadoPreguntas.Length):
-        preguntaRandom=listadoPreguntas[i]
-        pregunta=preguntaRandom[0]
-        respuestas= [preguntaRandom[1],preguntaRandom[2],preguntaRandom[3],preguntaRandom[4]]
+def obtenerPreguntaTrivialhp(preguntasRandom):
+        pregunta=preguntasRandom[0]
+        respuestas= [preguntasRandom[1],preguntasRandom[2],preguntasRandom[3],preguntasRandom[4]]
         random.shuffle(respuestas)
         respuesta1= respuestas[0]
         respuesta2=respuestas[1]
@@ -55,13 +56,17 @@ def obtener_preguntas_test(numero_preguntas=10):
     
 
 app= Flask(__name__)
+app.secret_key='1234'
 
 @app.route('/')
 def root():
     return render_template('index.html')
 
-@app.route('/trivialHP')
+@app.route('/trivialHP',methods=["GET","POST"])
 def trivialHP():
+    listaPreguntas=pedirPreguntasTrivialhp()
+    session['preguntas']=listaPreguntas
+    session['index']=0
     return render_template('registrarUsuarioTrivial.html')
 
 
@@ -86,55 +91,69 @@ def registrarUsuario():
             bd.commit()
             
         bd.close()
+        
         return redirect(url_for('jugarTrivialHP',usuario=usuario))
   
 @app.route('/jugarTrivialHP/<usuario>', methods=["GET","POST"])
 
 def jugarTrivialHP(usuario):
-    print('funcion llamada')
-    num_preguntas=5
-    contador_preguntas=int(request.args.get('contador_preguntas',0))
-    print('Inicio:',contador_preguntas)
+    listaPreguntas=session.get('preguntas')
+    indexPreguntas=session.get('index')
+    # comprobación que los datos han sido dados de forma correcta
+    print(listaPreguntas)
+    print(indexPreguntas)
+    if request.method=="GET":
+        if indexPreguntas< int(len(listaPreguntas)):
+            pregunta,respuesta1,respuesta2,respuesta3,respuesta4=obtenerPreguntaTrivialhp(listaPreguntas[indexPreguntas])
+            session['index']=indexPreguntas + 1
+            print(indexPreguntas)
+            return render_template('trivialHarryPotter.html', preguntaHtml=pregunta,respuesta1Html=respuesta1,respuesta2Html=respuesta2,respuesta3Html=respuesta3,respuesta4Html=respuesta4,usuario=usuario)
+        
+        else:
+            return  redirect(url_for('mostrarResultados', usuario=usuario)) 
     
-    if contador_preguntas<num_preguntas:
-        if request.method=="GET":
-            pregunta,respuesta1,respuesta2,respuesta3,respuesta4=obtenerPreguntaTrivialhp()
-            contador_preguntas+=1
-            print('pregunta sumada:',contador_preguntas)
-            return render_template('trivialHarryPotter.html', preguntaHtml=pregunta,respuesta1Html=respuesta1,respuesta2Html=respuesta2,respuesta3Html=respuesta3,respuesta4Html=respuesta4,usuario=usuario, contador_preguntas=contador_preguntas)
+    elif request.method=="POST":
+        bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                    database="trivialhp")
+        pregunta=request.form.get("pregunta")
+        respuestaUsuario=request.form.get("respuesta")
+        resultado=comprobarResultadoTrivialhp(pregunta,respuestaUsuario) 
+        cursor=bd.cursor()
+
+        if resultado==True:
+            query=f"UPDATE `resultados_hp_test` SET `aciertos`=`aciertos`+1 WHERE `nombre`='{usuario}';"
+
+        else:
+            query=f"UPDATE `resultados_hp_test` SET `errores`=`errores`+1 WHERE `nombre`='{usuario}';"
+
+        cursor.execute(query)
+        bd.commit()
+        bd.close()
+    
+        return redirect(url_for('jugarTrivialHP',usuario=usuario))
+        
+  
+       
       
-        elif request.method=="POST":
-            bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                        database="trivialhp")
-            pregunta=request.form.get("pregunta")
-            respuestaUsuario=request.form.get("respuesta")
-            resultado=comprobarResultadoTrivialhp(pregunta,respuestaUsuario) 
-            cursor=bd.cursor()
-
-            if resultado==True:
-                query=f"UPDATE `resultados_hp_test` SET `aciertos`=`aciertos`+1 WHERE `nombre`='{usuario}';"
-
-            else:
-                query=f"UPDATE `resultados_hp_test` SET `errores`=`errores`+1 WHERE `nombre`='{usuario}';"
-
-            cursor.execute(query)
-            bd.commit()
-            bd.close()
-            
-            contador_preguntas+=1
-            print('pregunta sumada:',contador_preguntas)
-            
-            return redirect(url_for('jugarTrivialHP', usuario=usuario,contador_preguntas=contador_preguntas))
-         
-    else:    
-        return redirect(url_for('resultadoTrivial',usuario=usuario))
     
     
 
-@app.route ('/resultadoTrivial',methods=["POST"])
+@app.route ('/resultadoTrivial/<usuario>',methods=["GET","POST"])
 def mostrarResultados(usuario):
+    bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                     database="trivialhp")
+    cursor=bd.cursor()
+    query=f"SELECT `aciertos` FROM `resultados_hp_test` where `nombre`='{usuario}';"
+    cursor.execute(query)
+    aciertos=cursor.fetchone()
+    query=f"SELECT `errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
+    cursor.execute(query)
+    errores=cursor.fetchone()
+    bd.close()
+    return "aquí irán los resultados del juego para el usuario: "+usuario
+    # return render_template('resultadoTrivial.html',usuario=usuario, aciertos=aciertos,errores=errores)
 
-    return render_template('resultadosTrivial.html',usuario=usuario)
+
 
 @app.route('/testCasas', methods=["GET", "POST"])
 def jugar_test():
@@ -177,7 +196,34 @@ def calcular_casa():
 
 @app.route('/estudiantesCasas',methods=["GET","POST"])
 def calcularEstudiantes():
-    return
+    bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                     database="trivialhp")
+    cursor=bd.cursor()
+    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Gryffindor';"
+    cursor.execute(query)
+    gryffindor=cursor.fetchone()
+    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Slytherin';"
+    cursor.execute(query)
+    slytherin=cursor.fetchone()
+    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Ravenclaw';"
+    cursor.execute(query)
+    ravenclaw=cursor.fetchone()
+    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Hufflepuff';"
+    cursor.execute(query)
+    hufflepuff=cursor.fetchone()
+    bd.close()
+    df =pd.DataFrame({
+        'Gryffindor': gryffindor,
+        'Slytherin': slytherin,
+        'RavenClaw' : ravenclaw,
+        'Hufflepuff' : hufflepuff
+    })
+    df.plot(figsize=(10,8), title='Estudiantes Casas', kind='bar', stacked=False)
+    output=io.BytesIO()
+    plt.savefig(output,format="png")
+    # grafico= Response(output.getvalue(), mimetype='image/png')
+    
+    return Response(output.getvalue(), mimetype='image/png')
 
 
 
@@ -214,4 +260,4 @@ def mostrarPorcentaje():
     return render_template('porcentajeCasas.html', porcentajes=porcentajes)
 
 
-app.run()
+app.run(debug=True)
