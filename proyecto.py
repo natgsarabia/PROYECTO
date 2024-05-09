@@ -18,8 +18,6 @@ def pedirPreguntasTrivialhp(numero_preguntas=10):
     bd.close()
     return listaPreguntas
     
-   
-   
 def obtenerPreguntaTrivialhp(preguntasRandom):
         pregunta=preguntasRandom[0]
         respuestas= [preguntasRandom[1],preguntasRandom[2],preguntasRandom[3],preguntasRandom[4]]
@@ -43,17 +41,34 @@ def comprobarResultadoTrivialhp(pregunta,respuestaUsuario):
         return True
     else:
         return False
-    
-def obtener_preguntas_test(numero_preguntas=10):
-    bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                     database="trivialhp")
-    cursor=bd.cursor()
+
+
+
+def obtener_pregunta_test(preguntas_random):
+    pregunta = preguntas_random[0]
+    opciones_respuestas = preguntas_random[1:]
+    random.shuffle(opciones_respuestas)
+    return pregunta, opciones_respuestas
+
+def pedir_preguntas_test(numero_preguntas=10):
+    bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
+    cursor = bd.cursor(dictionary=True)
     cursor.execute("SELECT * FROM TEST_Casas ORDER BY RAND() LIMIT %s", (numero_preguntas,))
-    preguntas = cursor.fetchall()
+    lista_preguntas = cursor.fetchall()
     cursor.close()
     bd.close()
-    return preguntas
-    
+    return lista_preguntas
+
+def guardar_respuesta_test(pregunta_id, opcion_seleccionada):
+    bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
+    cursor = bd.cursor()
+    query = "INSERT INTO respuestas_casas (pregunta_id, opcion_seleccionada) VALUES (%s, %s)"
+    cursor.execute(query, (pregunta_id, opcion_seleccionada))
+    bd.commit()
+    cursor.close()
+    bd.close()
+
+
 
 app= Flask(__name__)
 app.secret_key='1234'
@@ -131,10 +146,7 @@ def jugarTrivialHP(usuario):
         bd.close()
     
         return redirect(url_for('jugarTrivialHP',usuario=usuario))
-        
-  
-       
-      
+         
     
     
 
@@ -158,41 +170,42 @@ def mostrarResultados(usuario):
 @app.route('/testCasas', methods=["GET", "POST"])
 def jugar_test():
     if request.method == "GET":
-        preguntas = obtener_preguntas_test()
-        return render_template('testCasas.html', preguntas=preguntas)
+        listaPreguntas = pedir_preguntas_test()
+        session['preguntas'] = listaPreguntas
+        session['index'] = 0
+        return mostrar_pregunta(listaPreguntas)
+
     elif request.method == "POST":
-        pregunta_id = request.form.get("pregunta_id")
+        pregunta_actual = session.get('pregunta_actual')
+        pregunta_id = pregunta_actual['id']
         respuesta_seleccionada = request.form.get("respuesta")
-        actualizar_resultado(pregunta_id, respuesta_seleccionada)
-        preguntas = obtener_preguntas_test()
-        return render_template('testCasas.html', preguntas=preguntas)
+        guardar_respuesta_test(pregunta_id, respuesta_seleccionada)
+
+        listaPreguntas = session.get('preguntas')
+        indexPreguntas = session.get('index')
+
+        if indexPreguntas < len(listaPreguntas):
+            return mostrar_pregunta(listaPreguntas)
+        else:
+            return redirect(url_for('porcentajeCasas'))
 
 
-def actualizar_resultado(pregunta_id, respuesta_seleccionada):
-    bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                     database="trivialhp")
-    cursor=bd.cursor()
-    cursor.execute(f"SELECT respuesta_correcta FROM TEST_Casas WHERE id = {pregunta_id}")
-    respuesta_correcta = cursor.fetchone()[0]
-    if respuesta_seleccionada == respuesta_correcta:  
-        cursor.execute(f"UPDATE Resultados_HP_TEST SET aciertos = aciertos + 1 WHERE id = 1")
-    else:
-        cursor.execute(f"UPDATE Resultados_HP_TEST SET errores = errores + 1 WHERE id = 1")
-    bd.commit()
-    cursor.close()
+def mostrar_pregunta(listaPreguntas):
+    listaPreguntas = session.get('preguntas')
+    pregunta_actual = listaPreguntas[session['index']]
+    opciones_respuestas = [
+        pregunta_actual['respuesta_griffindor'],
+        pregunta_actual['respuesta_hufflepuff'],
+        pregunta_actual['respuesta_ravenclaw'],
+        pregunta_actual['respuesta_slytherin']
+    ]
+    random.shuffle(opciones_respuestas)
+    session['pregunta_actual'] = pregunta_actual
+    session['index'] += 1
+    return render_template('testCasas.html', pregunta=pregunta_actual['pregunta'], opciones_respuestas=opciones_respuestas)
 
-@app.route('/calcular_casa', methods=["POST"])
-def calcular_casa():
-    bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                     database="trivialhp")
-    cursor=bd.cursor()
-    casa = request.form.get("respuesta")
-    cursor = bd.cursor()
-    cursor.execute(f"INSERT INTO estudiantes_casas (casa) VALUES ('{casa}')")
-    bd.commit()
-    bd.close()
-    return redirect(url_for('porcentajeCasas'))
-    
+
+   
 
 @app.route('/estudiantesCasas',methods=["GET","POST"])
 def calcularEstudiantes():
@@ -227,37 +240,37 @@ def calcularEstudiantes():
 
 
 
-@app.route('/porcentajeCasas', methods=["GET", "POST"])
-def porcentajeCasas():
-    bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
-    cursor = bd.cursor()
-    cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Griffindor'")
-    griffindor = cursor.fetchone()[0]
-    cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Hufflepuff'")
-    hufflepuff = cursor.fetchone()[0]
-    cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Ravenclaw'")
-    ravenclaw = cursor.fetchone()[0]
-    cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Slytherin'")
-    slytherin = cursor.fetchone()[0]
-    total_estudiantes = griffindor + hufflepuff + ravenclaw + slytherin
-    porcentaje_griffindor = (griffindor / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-    porcentaje_hufflepuff = (hufflepuff / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-    porcentaje_ravenclaw = (ravenclaw / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-    porcentaje_slytherin = (slytherin / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-    cursor.execute("INSERT INTO porcentajeCasas (Griffindor, Hufflepuff, Ravenclaw, Slytherin) VALUES (%s, %s, %s, %s)", 
-                   (porcentaje_griffindor, porcentaje_hufflepuff, porcentaje_ravenclaw, porcentaje_slytherin))
-    bd.commit()
-    bd.close()
-    return redirect(url_for('mostrarPorcentaje'))
+# @app.route('/porcentajeCasas', methods=["GET", "POST"])
+# def porcentajeCasas():
+#     bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
+#     cursor = bd.cursor()
+#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Griffindor'")
+#     griffindor = cursor.fetchone()[0]
+#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Hufflepuff'")
+#     hufflepuff = cursor.fetchone()[0]
+#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Ravenclaw'")
+#     ravenclaw = cursor.fetchone()[0]
+#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Slytherin'")
+#     slytherin = cursor.fetchone()[0]
+#     total_estudiantes = griffindor + hufflepuff + ravenclaw + slytherin
+#     porcentaje_griffindor = (griffindor / total_estudiantes) * 100 if total_estudiantes != 0 else 0
+#     porcentaje_hufflepuff = (hufflepuff / total_estudiantes) * 100 if total_estudiantes != 0 else 0
+#     porcentaje_ravenclaw = (ravenclaw / total_estudiantes) * 100 if total_estudiantes != 0 else 0
+#     porcentaje_slytherin = (slytherin / total_estudiantes) * 100 if total_estudiantes != 0 else 0
+#     cursor.execute("INSERT INTO porcentajeCasas (Griffindor, Hufflepuff, Ravenclaw, Slytherin) VALUES (%s, %s, %s, %s)", 
+#                    (porcentaje_griffindor, porcentaje_hufflepuff, porcentaje_ravenclaw, porcentaje_slytherin))
+#     bd.commit()
+#     bd.close()
+#     return redirect(url_for('mostrarPorcentaje'))
 
-@app.route('/mostrarPorcentaje')
-def mostrarPorcentaje():
-    bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
-    cursor = bd.cursor()
-    cursor.execute("SELECT * FROM porcentaje_Casas") 
-    porcentajes = cursor.fetchone()
-    bd.close()
-    return render_template('porcentajeCasas.html', porcentajes=porcentajes)
+# @app.route('/mostrarPorcentaje')
+# def mostrarPorcentaje():
+#     bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
+#     cursor = bd.cursor()
+#     cursor.execute("SELECT * FROM porcentaje_Casas") 
+#     porcentajes = cursor.fetchone()
+#     bd.close()
+#     return render_template('porcentajeCasas.html', porcentajes=porcentajes)
 
 
 app.run(debug=True)
