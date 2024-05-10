@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect,url_for, session, Response
+from flask import Flask,render_template,request,redirect,url_for, session, flash
 import mysql.connector as mysql
 import random
 import pandas as pd
@@ -80,19 +80,18 @@ def trivialHP():
     listaPreguntas=pedirPreguntasTrivialhp()
     session['preguntas']=listaPreguntas
     session['index']=0
-    return render_template('registrarUsuarioTrivial.html')
+    return render_template('registrarUsuarioTrivial.html',mensaje="")
 
 
 @app.route('/jugartrivialHP',methods=["GET","POST"])
 def registrarUsuario():
-    bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                     database="trivialhp")
-    cursor=bd.cursor()
-    
     if request.method=="POST":
         registrar=request.form
         usuario=registrar.get('name')
 
+        bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                     database="trivialhp")
+        cursor=bd.cursor()
         query=f"SELECT COUNT(*) FROM `resultados_hp_test` WHERE `nombre`= '{usuario}';"
         cursor.execute(query)
         result= cursor.fetchone()
@@ -102,10 +101,15 @@ def registrarUsuario():
             query=f"INSERT INTO `resultados_hp_test`( `nombre`, `aciertos`, `errores`) VALUES ('{usuario}',0,0);"
             cursor.execute(query)
             bd.commit()
-            
-        bd.close()
+            bd.close()
+            return redirect(url_for('jugarTrivialHP',usuario=usuario))
+
+        else:
+            flash("Nombre de usuario ya registrado. Por favor, escoja otro usuario.","error")
+            return redirect(url_for('trivialHP'))
+    
+    return redirect(url_for('trivialHP'))
         
-        return redirect(url_for('jugarTrivialHP',usuario=usuario))
   
 @app.route('/jugarTrivialHP/<usuario>', methods=["GET","POST"])
 

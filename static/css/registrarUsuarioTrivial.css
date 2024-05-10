@@ -48,20 +48,21 @@ body{
     padding: 0%;
 }
 main{
-    height: 635px;
+    height: 450px;
     display:flex;
+    text-align: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     
 }
 .container{
-    height: 400px;
-    width: 900px;
+    height: 75%;
+    width: 90%;
     text-align: center;
     background-repeat: no-repeat;
     background-image: url("/static/assets/fondoAccordionItem.jpg") ;
-    background-size:950px;
+    background-size:110%;
     background-position: center ;
     border-radius: 45%;
     display: flex;
@@ -71,12 +72,22 @@ main{
     
     
 }
+.alert{
+    margin-top: -5%;
+    color: #FcDEBE;
+    background-color: #272D2E;
+    font-family: 'Harry P';
+    font-size: 35px;
+    border:solid 3px red;
+    height: 90px;
+    width: 700px;
+}
 .pregunta{
     color: #272D2E;
     margin-top: -30px;
     margin-left: -15px;
     height: 400px;
-    width: 900px;
+    width: 110%;
     backdrop-filter:blur(5px); 
     border-radius: 45%;
     font-family: 'Harry P';
