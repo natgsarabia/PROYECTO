@@ -24,7 +24,7 @@ CREATE TABLE `estudiantes_casas`(
 
 
 CREATE TABLE IF NOT EXISTS porcentaje_Casas (
-    id TINYINT NOT NULL AUTO_INCREMENT,
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT;
     Griffindor FLOAT NOT NULL,
     Hufflepuff FLOAT NOT NULL,
     Ravenclaw FLOAT NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS TEST_Casas (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE respuestas_casas (
-    id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT;
     pregunta_id TINYINT(2),
     opcion_seleccionada VARCHAR(50),
     PRIMARY KEY (id),
