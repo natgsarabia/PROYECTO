@@ -23,8 +23,8 @@
                             <ul class="dropdown-menu ">
                                 <li>
                                     <a class="dropdown-item articles" href="{{ url_for('trivialHP') }}">Trivial Harry Potter</a>
-                                    <a class="dropdown-item articles" href="{{ url_for('testCasas') }}">Descubre a que casa perteneces</a>
-                                    <a class="dropdown-item articles" href="{{ url_for('estudiantesCasas') }}">Nuestros estudiantes</a>  
+                                    <a class="dropdown-item articles" href="{{ url_for('jugar_test') }}">Descubre a que casa perteneces</a>
+                                    <a class="dropdown-item articles" href="{{ url_for('calcularEstudiantes') }}">Nuestros estudiantes</a>  
                                 </li>
                             </ul>
                         </li>
@@ -34,19 +34,13 @@
         </nav>
     </header>
 
-    <section class="contenedor">
-        <div class="casa" id="Gryffindor">Gryffindor</div>
-        <div class="casa" id="Hufflepuff">Hufflepuff</div>
-        <div class="casa" id="Ravenclaw">Ravenclaw</div>
-        <div class="casa" id="Slytherin">Slytherin</div>
-    </section>
-
-    <main>
-        <p>Griffindor: {{ porcentajes[1] }}%</p>
-        <p>Hufflepuff: {{ porcentajes[2] }}%</p>
-        <p>Ravenclaw: {{ porcentajes[3] }}%</p>
-        <p>Slytherin: {{ porcentajes[4] }}%</p>
-    </main>
+    <h1>Porcentajes de Casas</h1>
+    <div>
+        <p>Griffindor: {{ porcentaje_griffindor }}%</p>
+        <p>Hufflepuff: {{ porcentaje_hufflepuff }}%</p>
+        <p>Ravenclaw: {{ porcentaje_ravenclaw }}%</p>
+        <p>Slytherin: {{ porcentaje_slytherin }}%</p>
+    </div>
 
     <footer>
         <p><b>Natalia's &copy;</b></p>
