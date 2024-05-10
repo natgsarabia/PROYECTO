@@ -157,15 +157,14 @@ def mostrarResultados(usuario):
     bd=mysql.connect(user="root",password="",host="127.0.0.1",
                      database="trivialhp")
     cursor=bd.cursor()
-    query=f"SELECT `aciertos` FROM `resultados_hp_test` where `nombre`='{usuario}';"
+    query=f"SELECT `aciertos`, `errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
     cursor.execute(query)
-    aciertos=cursor.fetchone()
-    query=f"SELECT `errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
-    cursor.execute(query)
-    errores=cursor.fetchone()
+    data=cursor.fetchone()
     bd.close()
-    return "aquí irán los resultados del juego para el usuario: "+usuario
-    # return render_template('resultadoTrivial.html',usuario=usuario, aciertos=aciertos,errores=errores)
+    plt.pie(data,labels=['aciertos', 'errores'])
+    plt.savefig("C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/static/assets/resultadosUsuario.jpg")
+     
+    return render_template('resultadoTrivial.html')
 
 
 
@@ -219,7 +218,6 @@ def calcularEstudiantes():
     data=cursor.fetchall()
     bd.close()
     df= pd.DataFrame(data, columns=['Casa', 'Numero_estudiantes'])
-    df_estudiantesHowgarts=df.sort_values('Numero_estudiantes',ascending=False)
     df.plot(x='Casa',y='Numero_estudiantes', kind='bar', figsize=(10,8))
     plt.savefig("C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/static/assets/graficoEstudiantesCasas.jpg")
     

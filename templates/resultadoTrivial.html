@@ -42,20 +42,13 @@
     <main class="container">
         <h1>Resultado</h1>
  
-        <div class="nombreUsuario">
-            <p><span id="pregunta">{{usuario}}</span></p>
-        </div>
         <form action="/resultadoTrivial/{{ usuario}}" method="POST">
             <section class="resultadosTrivial">
-                <div class="grafico"></div>
-                <div class="leyenda">
-                    <span class="aciertos_color">
-                        <p class="aciertos">{{aciertos}}</p>
-                    </span>
-                    <span class="errores_color">
-                        <p class="errores">{{errores}}</p>
-                    </span>
+                <div class="grafico">
+                    <p ><img  src="{{ url_for('static', filename='assets/resultadosUsuario.png') }}" height="150px" width="150px" alt="First slide"></p>
                 </div>
+               
+                
             </section>     
         </form>
         
