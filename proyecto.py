@@ -3,6 +3,7 @@ import mysql.connector as mysql
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
 
 
@@ -213,13 +214,26 @@ def calcularEstudiantes():
     bd=mysql.connect(user="root",password="",host="127.0.0.1",
                      database="trivialhp")
     cursor=bd.cursor()
-    query="SELECT `casa` , `numEstudiantes`  FROM `estudiantes_casas`;"
+    query="SELECT `numEstudiantes`  FROM `estudiantes_casas`;"
     cursor.execute(query)
     data=cursor.fetchall()
     bd.close()
-    df= pd.DataFrame(data, columns=['Casa', 'Numero_estudiantes'])
-    df.plot(x='Casa',y='Numero_estudiantes', kind='bar', figsize=(10,8))
-    plt.savefig("C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/static/assets/graficoEstudiantesCasas.jpg")
+    fig,ax= plt.subplots(figsize=(10,8))
+   
+    
+    x=['Griffindor','Hufflepuff','Ravenclaw','Slytherin']
+    y=[data[0][0],data[1][0],data[2][0],data[3][0]]
+
+    colores=['#C70039','#ECCB25','#1511C6','#047134']
+    ax.bar(x,y, color=colores)
+
+    fig.set_facecolor('#FcDEBE')
+    ax.set_facecolor('#FcDEBE')
+
+    static_folder = os.path.join(app.root_path, 'static')
+    save_path= os.path.join(static_folder, 'assets','graficoEstudiantesCasas.jpg')
+
+    plt.savefig(save_path)
     
     
     return render_template("estudiantesCasas.html")

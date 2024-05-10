@@ -50,23 +50,13 @@ body{
 
 }
 main{
-    margin-top: -5%;
-    display:inline-block;
-    flex-direction: column;
+    display:flex;
     align-items: center;
     justify-content: center;
     
 }
 
-.title{
-    color: #FcDEBE;
-    font-family: "Harry P";
-    font-size: 70px; 
-    margin-bottom: -2%;
-}
-.escudos{
-    flex-direction: row;
-}
+
 footer{
     color: #FcDEBE;
     background-color:#272D2E;
