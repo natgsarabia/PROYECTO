@@ -23,15 +23,6 @@ CREATE TABLE `estudiantes_casas`(
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-CREATE TABLE IF NOT EXISTS porcentaje_Casas (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT;
-    Griffindor FLOAT NOT NULL,
-    Hufflepuff FLOAT NOT NULL,
-    Ravenclaw FLOAT NOT NULL,
-    Slytherin FLOAT NOT NULL,
-    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE IF NOT EXISTS TEST_Casas ( 
 	id TINYINT(2) NOT NULL, 
 	pregunta VARCHAR(100) NOT NULL, 
