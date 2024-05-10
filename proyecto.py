@@ -228,37 +228,32 @@ def calcularEstudiantes():
 
 
 
-# @app.route('/porcentajeCasas', methods=["GET", "POST"])
-# def porcentajeCasas():
-#     bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
-#     cursor = bd.cursor()
-#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Griffindor'")
-#     griffindor = cursor.fetchone()[0]
-#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Hufflepuff'")
-#     hufflepuff = cursor.fetchone()[0]
-#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Ravenclaw'")
-#     ravenclaw = cursor.fetchone()[0]
-#     cursor.execute("SELECT COUNT(*) FROM estudiantes_casas WHERE casa='Slytherin'")
-#     slytherin = cursor.fetchone()[0]
-#     total_estudiantes = griffindor + hufflepuff + ravenclaw + slytherin
-#     porcentaje_griffindor = (griffindor / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-#     porcentaje_hufflepuff = (hufflepuff / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-#     porcentaje_ravenclaw = (ravenclaw / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-#     porcentaje_slytherin = (slytherin / total_estudiantes) * 100 if total_estudiantes != 0 else 0
-#     cursor.execute("INSERT INTO porcentajeCasas (Griffindor, Hufflepuff, Ravenclaw, Slytherin) VALUES (%s, %s, %s, %s)", 
-#                    (porcentaje_griffindor, porcentaje_hufflepuff, porcentaje_ravenclaw, porcentaje_slytherin))
-#     bd.commit()
-#     bd.close()
-#     return redirect(url_for('mostrarPorcentaje'))
+@app.route('/porcentajeCasas', methods=["GET", "POST"])
+def porcentajeCasas():
+    bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
+    cursor = bd.cursor()
 
-# @app.route('/mostrarPorcentaje')
-# def mostrarPorcentaje():
-#     bd = mysql.connect(user="root", password="", host="127.0.0.1", database="trivialhp")
-#     cursor = bd.cursor()
-#     cursor.execute("SELECT * FROM porcentaje_Casas") 
-#     porcentajes = cursor.fetchone()
-#     bd.close()
-#     return render_template('porcentajeCasas.html', porcentajes=porcentajes)
+    cursor.execute("SELECT COUNT(opcion_seleccionada) FROM respuestas_casas WHERE opcion_seleccionada='Griffindor'")
+    griffindor = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(opcion_seleccionada) FROM respuestas_casas WHERE opcion_seleccionada='Hufflepuff'")
+    hufflepuff = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(opcion_seleccionada) FROM respuestas_casas WHERE opcion_seleccionada='Ravenclaw'")
+    ravenclaw = cursor.fetchone()[0]
+    cursor.execute("SELECT COUNT(opcion_seleccionada) FROM respuestas_casas WHERE opcion_seleccionada='Slytherin'")
+    slytherin = cursor.fetchone()[0]
+
+    total_respuestas = griffindor + hufflepuff + ravenclaw + slytherin
+
+    porcentaje_griffindor = (griffindor / total_respuestas) * 100 if total_respuestas != 0 else 0
+    porcentaje_hufflepuff = (hufflepuff / total_respuestas) * 100 if total_respuestas != 0 else 0
+    porcentaje_ravenclaw = (ravenclaw / total_respuestas) * 100 if total_respuestas != 0 else 0
+    porcentaje_slytherin = (slytherin / total_respuestas) * 100 if total_respuestas != 0 else 0
+
+    bd.close()
+
+    return render_template('porcentajeCasas.html', porcentaje_griffindor=porcentaje_griffindor, porcentaje_hufflepuff=porcentaje_hufflepuff, porcentaje_ravenclaw=porcentaje_ravenclaw, porcentaje_slytherin=porcentaje_slytherin)
+
+
 
 
 app.run(debug=True)
