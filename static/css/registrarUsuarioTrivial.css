@@ -14,7 +14,6 @@ html{
 }
 
 header{
-    background-color:#272D2E; 
     background-image: url("/static/assets/fondo2.gif")  ;   
     background-size: cover;
     opacity: 0.5;

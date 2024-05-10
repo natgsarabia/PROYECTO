@@ -1,8 +1,6 @@
 from flask import Flask,render_template,request,redirect,url_for, session, Response
 import mysql.connector as mysql
 import random
-import io
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -212,31 +210,17 @@ def calcularEstudiantes():
     bd=mysql.connect(user="root",password="",host="127.0.0.1",
                      database="trivialhp")
     cursor=bd.cursor()
-    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Gryffindor';"
+    query="SELECT `casa` , `numEstudiantes`  FROM `estudiantes_casas`;"
     cursor.execute(query)
-    gryffindor=cursor.fetchone()
-    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Slytherin';"
-    cursor.execute(query)
-    slytherin=cursor.fetchone()
-    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Ravenclaw';"
-    cursor.execute(query)
-    ravenclaw=cursor.fetchone()
-    query="SELECT `numEstudiantes`  FROM `estudiantes_casas` WHERE `casa`='Hufflepuff';"
-    cursor.execute(query)
-    hufflepuff=cursor.fetchone()
+    data=cursor.fetchall()
     bd.close()
-    df =pd.DataFrame({
-        'Gryffindor': gryffindor,
-        'Slytherin': slytherin,
-        'RavenClaw' : ravenclaw,
-        'Hufflepuff' : hufflepuff
-    })
-    df.plot(figsize=(10,8), title='Estudiantes Casas', kind='bar', stacked=False)
-    output=io.BytesIO()
-    plt.savefig(output,format="png")
-    # grafico= Response(output.getvalue(), mimetype='image/png')
+    df= pd.DataFrame(data, columns=['Casa', 'Numero_estudiantes'])
+    df_estudiantesHowgarts=df.sort_values('Numero_estudiantes',ascending=False)
+    df.plot(x='Casa',y='Numero_estudiantes', kind='bar', figsize=(10,8))
+    plt.savefig("C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/static/assets/graficoEstudiantesCasas.jpg")
     
-    return Response(output.getvalue(), mimetype='image/png')
+    
+    return render_template("estudiantesCasas.html")
 
 
 

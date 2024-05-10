@@ -1,3 +1,44 @@
+html{
+    margin-top: 0%;
+    padding: 0%;
+    size: 1000px;
+}
+
+
+.dropdown-toggle::after{
+    display: none
+}
+
+.dropdown-toggle img{
+    cursor: pointer;
+}
+
+header{
+    background-image: url("/static/assets/fondo2.gif") ;   
+    background-size: cover;
+    opacity:0.5;
+    margin-top: -30px;
+      
+}
+.dropdown-menu{
+    background-color: #FcDEBE;
+    color:#272D2E;  
+    font-size: large;
+    font-weight: bolder;
+    font-size: 200%;
+
+}
+.navbar{
+    font-family: 'Harry P';
+}
+.carousel{
+    margin-bottom: 60px;
+}
+.carousel-item{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 body{ 
     background-repeat: no-repeat;
     background-image: url("https://pm1.aminoapps.com/6974/29505fdc8d53d7d0eda2c720a47f713cd4b62bfar1-1024-576v2_hq.jpg") ;

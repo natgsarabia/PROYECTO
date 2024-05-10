@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/estudiantesCasas.css')}}">
-
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/index.css')}}">
+    <link href="https://fonts.cdnfonts.com/css/qilla" rel="stylesheet">
 </head>
 <body class="background-container">
     <header>
@@ -17,7 +17,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle subtitle"   data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/snitch.gif" height="90px">  
+                                <img src="{{ url_for('static', filename='/assets/snitch.gif') }}" height="90px">  
                             </a>
                             <ul class="dropdown-menu ">
                                 <li>
@@ -34,18 +34,18 @@
         <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <p ><img  src="file:///C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/assets/logo.png" height="150px" width="150px" alt="First slide"></p>
+                <p ><img  src="{{ url_for('static', filename='/assets/logo.png') }}" height="150px" width="150px" alt="First slide"></p>
               </div>             
             </div>
           </div>
     </header>
     <main class="container">
         <h1>Resultado</h1>
-
         <form action="/estudiantesCasas" method="POST">
             <section class="resultadosTrivial">
                 <div class="grafico">
-                    <img scr="data:image/png;base64, {{grafico}}">
+                    <img scr="{{ url_for('static', filename='assets/graficoEstudiantesCasas.png') }}" height="400px" width="600px">
+                    <img scr="{{ url_for('static', filename='/assets/logo.png') }}" height="400px" width="600px">
                 </div>
             </section>     
         </form>

@@ -16,7 +16,6 @@ html{
 }
 
 header{
-    background-color:#272D2E; 
     background-image: url("/static/assets/fondo2.gif")  ;   
     background-size: cover;
     opacity: 0.5;
@@ -57,13 +56,12 @@ main {
 }
 
 .container{
-    margin-top:70px;
-    height: 550px;
+    height: 650px;
     width: 1000px;
     text-align: center;
     background-repeat: no-repeat;
     background-image: url("/static/assets/fondoAccordionItem.jpg") ;
-    background-size:1050px;
+    background-size:1250px;
     background-position: center ;
     border-radius: 5%;
     display:inline-block;
