@@ -162,16 +162,27 @@ def mostrarResultados(usuario):
     cursor.execute(query)
     aciertos=cursor.fetchone()
     puntuacion=aciertos[0]
-    query=f"SELECT `aciertos`, `errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
+    query=f"SELECT `aciertos`,`errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
     cursor.execute(query)
     data=cursor.fetchone()
+    
     bd.close()
     colores=['#0AC95F','#DC1F1A']
+    plt.gca().set_facecolor('#F0F0F0')
+    plt.rcParams['font.family'] = 'HARRY P'
+
     plt.pie(data,labels=['ACIERTOS', 'ERRORES'],autopct='%0.1f%%',colors=colores)
+    
     plt.axis("equal")
     static_folder = os.path.join(app.root_path, 'static')
     save_path= os.path.join(static_folder, 'assets','resultado.jpg')
+    
+    if os.path.exists(save_path):
+        os.remove(save_path)
+
     plt.savefig(save_path)
+    
+    plt.close()
     return render_template('resultadoTrivial.html',puntuacion=puntuacion)
 
     
@@ -239,7 +250,11 @@ def calcularEstudiantes():
     static_folder = os.path.join(app.root_path, 'static')
     save_path= os.path.join(static_folder, 'assets','graficoEstudiantesCasas.jpg')
 
+    if os.path.exists(save_path):
+        os.remove(save_path)
+
     plt.savefig(save_path)
+
     
     
     return render_template("estudiantesCasas.html")
@@ -267,6 +282,23 @@ def porcentajeCasas():
     porcentaje_ravenclaw = (ravenclaw / total_respuestas) * 100 if total_respuestas != 0 else 0
     porcentaje_slytherin = (slytherin / total_respuestas) * 100 if total_respuestas != 0 else 0
 
+    
+    mayorPuntuacion=0
+    if griffindor>mayorPuntuacion:
+        mayorPuntuacion=griffindor
+        casaGanadora='Gryffindor'
+    if hufflepuff>mayorPuntuacion:
+        mayorPuntuacion=hufflepuff
+        casaGanadora='Hufflepuff'
+    if ravenclaw>mayorPuntuacion:
+        mayorPuntuacion=ravenclaw
+        casaGanadora='Ravenclaw'
+    if slytherin>mayorPuntuacion:
+        casaGanadora='Slytherin'
+
+    query=f"UPDATE `estudiantes_casas` SET `numEstudiantes`=`numEstudiantes`+1 WHERE `casa`='{casaGanadora}';"
+    cursor.execute(query)
+    bd.commit()
     bd.close()
 
     return render_template('porcentajeCasas.html', porcentaje_griffindor=porcentaje_griffindor, porcentaje_hufflepuff=porcentaje_hufflepuff, porcentaje_ravenclaw=porcentaje_ravenclaw, porcentaje_slytherin=porcentaje_slytherin)

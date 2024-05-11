@@ -91,9 +91,9 @@ main{
 .grafico{
     width:300px;
     height: 300px;
-    border-radius:50%;
-    box-shadow: 1px 1px 5px rgb(70,70,70);
-    font-family: "HARRY P";
+    margin-right:7%;
+  
+    
 }
 
 footer{
