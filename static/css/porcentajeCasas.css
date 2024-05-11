@@ -1,25 +1,93 @@
+@import url('https://fonts.cdnfonts.com/css/harry-p');
+
+html{
+    margin-top: 0%;
+    padding: 0%;
+    size: 1000px;
+}
+
+
+.dropdown-toggle::after{
+    display: none
+}
+
+.dropdown-toggle img{
+    cursor: pointer;
+}
+
+header{
+    background-image: url("/static/assets/fondo2.gif") ;   
+    background-size: cover;
+    opacity:0.5;
+    margin-top: -30px;
+      
+}
+.dropdown-menu{
+    background-color: #FcDEBE;
+    color:#272D2E;  
+    font-size: large;
+    font-weight: bolder;
+    font-size: 200%;
+
+}
+.navbar{
+    font-family: 'Harry P';
+}
+.carousel{
+    margin-bottom: 60px;
+}
+.carousel-item{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 body{ 
     background-repeat: no-repeat;
-    background-image: url("https://pm1.aminoapps.com/6974/29505fdc8d53d7d0eda2c720a47f713cd4b62bfar1-1024-576v2_hq.jpg") ;
+    background-image: url("https://www.xtrafondos.com/wallpapers/resoluciones/23/hogwarts-harry-potter_2560x1440_11461.jpg") ;
     background-size:cover;
     background-position: center top ;
     color: white;
-    margin: 0px;
-    padding: 150px;
-    backdrop-filter:blur(5px);
     font-family: 'Harry P', sans-serif;   
-    font-size: 30px;
+    backdrop-filter: blur(3px);
 }
 
-@import url('https://fonts.cdnfonts.com/css/harry-p');
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
 
 h1 {
-    padding: 20px;
+    margin-top: 20px;
+    font-size: 70px;
+    
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
 }
-footer {
+
+img {
+    margin-top: 20px;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 50px;
+    color: white;
     text-align: center;
-    align-content: center;
-    margin-top: 20px; 
-    font-size: 20px; 
-    padding: 50px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+}
+
+footer{
+    color: #FcDEBE;
+    background-color:#272D2E;
+    font-family: "Harry P";
+    position: bottom;
+    text-align:  center;
+    margin-top: 15%;
+    margin-bottom: -15px;
+    height: 50px;  
+    font-size: 25px;  
 }
