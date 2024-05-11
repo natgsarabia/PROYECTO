@@ -34,13 +34,36 @@
         </nav>
     </header>
 
-    <h1>Porcentajes de Casas</h1>
-    <div>
-        <p>Griffindor: {{ porcentaje_griffindor }}%</p>
-        <p>Hufflepuff: {{ porcentaje_hufflepuff }}%</p>
-        <p>Ravenclaw: {{ porcentaje_ravenclaw }}%</p>
-        <p>Slytherin: {{ porcentaje_slytherin }}%</p>
-    </div>
+    <main class="container">
+
+        {% if porcentaje_griffindor > porcentaje_hufflepuff and porcentaje_griffindor > porcentaje_ravenclaw and porcentaje_griffindor > porcentaje_slytherin %}
+            <h1 style="color:rgb(187, 0, 0);">"GRYFFINDOR"</h1>
+            <img src="{{ url_for('static', filename='assets/griffindor.png') }}" height="250px" width="250px" >
+            <p style="color:rgb(187, 0, 0);">Felicidades has sido seleccionado para la Casa Gryffindor. Bienvenido al coraje, la valentía y la determinación.</p>
+
+        {% elif porcentaje_hufflepuff > porcentaje_griffindor and porcentaje_hufflepuff > porcentaje_ravenclaw and porcentaje_hufflepuff> porcentaje_slytherin %}
+            <h1 style="color: rgb(231, 216, 0)">"HUFFLEPUFF"</h1>
+            <img src="{{ url_for('static', filename='assets/hufflepuff.png') }}" height="250px" width="250px"  >
+            <p style="color: rgb(231, 216, 0)">Felicidades, ahora eres parte de la Casa Hufflepuff. Bienvenido a la lealtad, la paciencia y el trabajo duro.</p>
+
+        {% elif porcentaje_ravenclaw > porcentaje_hufflepuff and porcentaje_ravenclaw > porcentaje_griffindor and porcentaje_ravenclaw > porcentaje_slytherin %}
+            <h1 style="color: rgb(28, 69, 255)">"RAVENCLAW"</h1>
+            <img src="{{ url_for('static', filename='assets/ravenclaw.png') }}" height="250px" width="250px"  >
+            <p style="color: rgb(28, 69, 255)">Felicidades por haber llegado a la Casa Ravenclaw. Bienvenido a la inteligencia, la sabiduría y la creatividad.</p>
+
+        {% elif porcentaje_slytherin > porcentaje_hufflepuff and porcentaje_slytherin > porcentaje_ravenclaw and porcentaje_slytherin > porcentaje_griffindor %}
+            <h1 style="color: rgb(0, 124, 41)">"SLYTHERIN</h1>
+            <img src="{{ url_for('static', filename='assets/slytherin.png') }}" height="250px" width="250px">
+            <p style="color: rgb(0, 124, 41)">Felicidades por haber sido seleccionado para la Casa Slytherin. Bienvenido a la astucia, la ambición y la determinación.</p>
+
+        {% else %}
+            <p>Tus resultados han sido impresionantes. Perteneces a mas de una casa!</p>
+            <img src="{{ url_for('static', filename='assets/casas.png') }}" height="350px" width="350px">
+
+        {% endif %}
+        
+
+    </main>
 
     <footer>
         <p><b>Natalia's &copy;</b></p>
