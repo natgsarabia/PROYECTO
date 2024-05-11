@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Test de Casas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/casas.css')}}">
+    <link href="https://fonts.cdnfonts.com/css/harry-p" rel="stylesheet">
+
+
+</head>
+<body class="background-container">
+    <header>
+        <nav class="navbar navbar-expand-lg" >
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle subtitle"   data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ url_for('static', filename='/assets/snitch.gif') }}" height="90px">  
+                            </a>
+                            <ul class="dropdown-menu ">
+                                <li>
+                                    <a class="dropdown-item articles" href="{{ url_for('trivialHP') }}">Trivial Harry Potter</a>
+                                    <a class="dropdown-item articles" href="{{ url_for('jugar_test') }}">Descubre a qué casa perteneces</a>
+                                    <a class="dropdown-item articles" href="{{ url_for('calcularEstudiantes') }}">Nuestros estudiantes</a> 
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+    <img  src="{{ url_for('static', filename='assets/casas.png') }}" height="200px" width="200px">
+    
+    <h1>A que casa perteneces?</h1>
+        
+    <form action="/testCasas" method="POST">
+        <div>
+            <p>{{ pregunta }}</p>
+            <input type="hidden" name="pregunta_id" value="{{ pregunta_id }}">
+            <div class="option">
+                <input type="radio" name="respuesta" value="Griffindor" id="griffindor">
+                <label for="griffindor">{{ opciones_respuestas[0] }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="respuesta" value="Hufflepuff" id="hufflepuff">
+                <label for="hufflepuff">{{ opciones_respuestas[1] }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="respuesta" value="Ravenclaw" id="ravenclaw">
+                <label for="ravenclaw">{{ opciones_respuestas[2] }}</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="respuesta" value="Slytherin" id="slytherin">
+                <label for="slytherin">{{ opciones_respuestas[3] }}</label>
+            </div>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+    
+       
+
+    </main>
+    <footer>
+        <p><b>Natalia's &copy;</b></p>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
