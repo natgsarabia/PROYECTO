@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS TEST_Casas (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE respuestas_casas (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT;
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     pregunta_id TINYINT(2),
     opcion_seleccionada VARCHAR(50),
     PRIMARY KEY (id),
