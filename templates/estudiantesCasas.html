@@ -43,25 +43,18 @@
     <p class="title">Estudiantes Howgarts</p>
 
     <main class="container">
-        <div class="row">
-            <div class="column">
-                <span>
-                    <img src="{{ url_for('static', filename='/assets/escudoGryffindor.gif') }}" height="100px" width="100px">
-                </span>
-                <span>  
-                    <img src="{{ url_for('static', filename='/assets/escudoHufflepuff.gif') }}" height="100px" width="100px">
-                </span>  
+        <div class="column">
+
+            <div class="escudos1">
+                <img src="{{ url_for('static', filename='/assets/escudoGryffindor.gif') }}" height="150px" width="150px" style="margin-right: 30px;">
+                <img src="{{ url_for('static', filename='/assets/escudoHufflepuff.gif') }}" height="150px" width="150px" style="margin-right: 30px;">
             </div>
-            <div class="column">
-                <img src="{{ url_for('static', filename='/assets/graficoEstudiantesCasas.jpg') }}" height="400px" width="600px">
-            </div>
-            <div class="column">
-                <span >
-                    <img src="{{ url_for('static', filename='/assets/escudoRavenclaw.gif') }}" height="100px" width="100px">
-                </span>
-                <span >
-                    <img src="{{ url_for('static', filename='/assets/escudoSlytherin.gif') }}" height="100px" width="100px">
-                </span>
+            
+            <img src="{{ url_for('static', filename='/assets/graficoEstudiantesCasas.jpg') }}" height="400px" width="600px">
+            
+            <div class="escudos2">
+                <img src="{{ url_for('static', filename='/assets/escudoRavenclaw.gif') }}" height="150px" width="150px" style="margin-left: 30px;">
+                <img src="{{ url_for('static', filename='/assets/escudoSlytherin.gif') }}" height="150px" width="150px" style="margin-left: 30px;">
             </div>
         </div>
     </main>
