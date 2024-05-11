@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/harry-p');
+
 html{
     margin-top: 0%;
     padding: 0%;
@@ -17,7 +19,7 @@ header{
     background-image: url("/static/assets/fondo2.gif")  ;   
     background-size: cover;
     opacity: 0.5;
-    margin-top: -30px;
+    
 }
 
 .dropdown-menu{
@@ -46,34 +48,52 @@ body{
     backdrop-filter:blur(10px);
     margin-top:0;
     padding: 0%;
+
 }
+
 main{
-    height: 450px;
     display:flex;
     text-align: center;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    
+}
+.title{
+    color: #FcDEBE;
+    font-family: "HARRY P";
+    font-size: 70px;
+    
+}
+.gif{
+    margin-bottom: 5%;
+}
+.giftResultado{
+    height: 250px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-image: url("/static/assets/fondoAccordionItem.jpg") ;
+    background-size:1250px;
+    background-position: center ;
+    border-radius: 70%;  
+    opacity: 0.85;
+    color: #272D2E;
+    font-family: 'Qilla', sans-serif;
+    font-size: 20px;
+    margin-bottom: 10%;
+}
+.result{
+    margin: 5%;
     
 }
 
-.resultadosTrivial{
-    width: 700px;
-    height: 550px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    margin-left:auto;
-    margin-right:auto;
-}
-
 .grafico{
-    width:400px;
-    height: 400px;
+    width:300px;
+    height: 300px;
     border-radius:50%;
-    background-image: conic-gradient(var(--aciertos--),
-                                    var(--errores));
-    box-shadow: 1px 1px 5px rgb(70,70,70)
+    box-shadow: 1px 1px 5px rgb(70,70,70);
+    font-family: "HARRY P";
 }
 
 footer{

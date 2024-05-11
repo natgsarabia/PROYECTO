@@ -39,25 +39,34 @@
             </div>
           </div>
     </header>
+    
+    <p class="title">Estudiantes Howgarts</p>
+
     <main class="container">
-        <span class="title">
-            <p>Estudiantes Howgarts</p>
-        </span> 
-        <span>
-            <div class="escudos">
-                <img class="grafico" src="{{ url_for('static', filename='/assets/escudoGryffindor.gif') }}" height="100px" width="200px" >
-                <img class="grafico" src="{{ url_for('static', filename='/assets/escudoHufflepuff.gif') }}" height="100px" width="200px" >
+        <div class="row">
+            <div class="column">
+                <span>
+                    <img src="{{ url_for('static', filename='/assets/escudoGryffindor.gif') }}" height="100px" width="100px">
+                </span>
+                <span>  
+                    <img src="{{ url_for('static', filename='/assets/escudoHufflepuff.gif') }}" height="100px" width="100px">
+                </span>  
             </div>
-            <div>
-                <img class="grafico" src="{{ url_for('static', filename='/assets/graficoEstudiantesCasas.jpg') }}" height="400px" width="600px">
+            <div class="column">
+                <img src="{{ url_for('static', filename='/assets/graficoEstudiantesCasas.jpg') }}" height="400px" width="600px">
             </div>
-            <div>
-                <img class="grafico" src="{{ url_for('static', filename='/assets/escudoRavenclaw.gif') }}" height="100px" width="200px">
-                <img class="grafico" src="{{ url_for('static', filename='/assets/escudoSlytherin.gif') }}" height="100px" width="200px">
+            <div class="column">
+                <span >
+                    <img src="{{ url_for('static', filename='/assets/escudoRavenclaw.gif') }}" height="100px" width="100px">
+                </span>
+                <span >
+                    <img src="{{ url_for('static', filename='/assets/escudoSlytherin.gif') }}" height="100px" width="100px">
+                </span>
             </div>
-        </span>
-         
+        </div>
     </main>
+    
+    
     <footer>
         <p><b>Natalia's &copy;</b></p>
     </footer>

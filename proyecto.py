@@ -158,17 +158,23 @@ def mostrarResultados(usuario):
     bd=mysql.connect(user="root",password="",host="127.0.0.1",
                      database="trivialhp")
     cursor=bd.cursor()
+    query=f"SELECT `aciertos` FROM `resultados_hp_test` where `nombre`='{usuario}';"
+    cursor.execute(query)
+    aciertos=cursor.fetchone()
+    puntuacion=aciertos[0]
     query=f"SELECT `aciertos`, `errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
     cursor.execute(query)
     data=cursor.fetchone()
     bd.close()
-    plt.pie(data,labels=['aciertos', 'errores'])
-    plt.savefig("C:/Users/Natalia/Desktop/DAW/BIGDATA/PROYECTO/static/assets/resultadosUsuario.jpg")
-     
-    return render_template('resultadoTrivial.html')
+    colores=['#0AC95F','#DC1F1A']
+    plt.pie(data,labels=['ACIERTOS', 'ERRORES'],autopct='%0.1f%%',colors=colores)
+    plt.axis("equal")
+    static_folder = os.path.join(app.root_path, 'static')
+    save_path= os.path.join(static_folder, 'assets','resultado.jpg')
+    plt.savefig(save_path)
+    return render_template('resultadoTrivial.html',puntuacion=puntuacion)
 
-
-
+    
 @app.route('/testCasas', methods=["GET", "POST"])
 def jugar_test():
     if request.method == "GET":
