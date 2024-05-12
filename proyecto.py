@@ -1,7 +1,9 @@
-from flask import Flask,render_template,request,redirect,url_for, session, flash
+from flask import Flask,render_template,request,redirect,url_for, session, flash, send_from_directory
 import mysql.connector as mysql
 import random
-import pandas as pd
+import matplotlib
+# para poder acceder a los graficos, los almacena en Agg en vez de en el flujo del Flask
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import os
 
@@ -42,7 +44,6 @@ def comprobarResultadoTrivialhp(pregunta,respuestaUsuario):
         return False
 
 
-
 def obtener_pregunta_test(preguntas_random):
     pregunta = preguntas_random[0]
     opciones_respuestas = preguntas_random[1:]
@@ -67,10 +68,38 @@ def guardar_respuesta_test(pregunta_id, opcion_seleccionada):
     cursor.close()
     bd.close()
 
+def generarGraficoTestHP(usuario):
+    bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                     database="trivialhp")
+    cursor=bd.cursor()
+    query=f"SELECT `aciertos`,`errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
+    cursor.execute(query)
+    data=cursor.fetchone()
+    bd.close()
 
+    colores=['#0AC95F','#DC1F1A']
+
+    plt.pie(data,labels=['ACIERTOS', 'ERRORES'],autopct='%0.1f%%',colors=colores)
+    
+    plt.axis("equal")
+    # pedimos al programa que busque al ruta donde se encuentra la carpeta static del host
+    static_folder = os.path.join(app.root_path, 'static')
+    save_path= os.path.join(static_folder, 'assets','resultado.jpg')
+    
+    if os.path.exists(save_path):
+        os.remove(save_path)
+
+    plt.savefig(save_path)
+    
+    plt.close()
 
 app= Flask(__name__)
 app.secret_key='1234'
+
+# Aseguramos que el programa cierre los graficos despues de procesar una solicitud
+def cerrarGraficos(exception=None):
+    plt.close()
+   
 
 @app.route('/')
 def root():
@@ -162,27 +191,8 @@ def mostrarResultados(usuario):
     cursor.execute(query)
     aciertos=cursor.fetchone()
     puntuacion=aciertos[0]
-    query=f"SELECT `aciertos`,`errores` FROM `resultados_hp_test` where `nombre`='{usuario}';"
-    cursor.execute(query)
-    data=cursor.fetchone()
-    
-    bd.close()
-    colores=['#0AC95F','#DC1F1A']
-    plt.gca().set_facecolor('#F0F0F0')
-    plt.rcParams['font.family'] = 'HARRY P'
-
-    plt.pie(data,labels=['ACIERTOS', 'ERRORES'],autopct='%0.1f%%',colors=colores)
-    
-    plt.axis("equal")
-    static_folder = os.path.join(app.root_path, 'static')
-    save_path= os.path.join(static_folder, 'assets','resultado.jpg')
-    
-    if os.path.exists(save_path):
-        os.remove(save_path)
-
-    plt.savefig(save_path)
-    
-    plt.close()
+    generarGraficoTestHP(usuario)
+  
     return render_template('resultadoTrivial.html',puntuacion=puntuacion)
 
     
@@ -254,6 +264,8 @@ def calcularEstudiantes():
         os.remove(save_path)
 
     plt.savefig(save_path)
+    plt.close()
+    bd.close()
 
     
     

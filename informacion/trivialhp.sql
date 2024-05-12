@@ -1,5 +1,6 @@
 CREATE DATABASE `TrivialHP`;
 Use `TrivialHP`;
+
 CREATE TABLE `Trivial_preguntas_generales_HP`(
  `id` TINYINT (2) NOT NULL,
 `pregunta` VARCHAR (200) NOT NULL,
@@ -10,14 +11,14 @@ CREATE TABLE `Trivial_preguntas_generales_HP`(
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Resultados_HP_TEST`(
- 	`id` TINYINT (2) NOT NULL,
+ 	`id` TINYINT (2) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 `nombre` VARCHAR (100) NOT NULL,
 `aciertos` TINYINT (2)  NULL,
 `errores` TINYINT (2)  NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `estudiantes_casas`(
- 	`id` TINYINT (2) NOT NULL,
+ 	`id` TINYINT (2) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 `casa` VARCHAR (30) NOT NULL,
 `numEstudiantes` INT (10) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -30,15 +31,14 @@ CREATE TABLE IF NOT EXISTS TEST_Casas (
 	respuesta_hufflepuff VARCHAR(100) NOT NULL, 
 	respuesta_ravenclaw VARCHAR(100) NOT NULL, 
 	respuesta_slytherin VARCHAR(100) NOT NULL, 
-	PRIMARY KEY (ID) 
+	PRIMARY KEY (`id`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE respuestas_casas (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
     pregunta_id TINYINT(2),
     opcion_seleccionada VARCHAR(50),
-    PRIMARY KEY (id),
-    FOREIGN KEY (pregunta_id) REFERENCES TEST_Casas(id)
+    FOREIGN KEY (`pregunta_id`) REFERENCES TEST_Casas(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -96,11 +96,12 @@ INSERT INTO Trivial_preguntas_generales_HP VALUES
 (50,'¿Qué nombre recibe la tienda de chucherías cerca de Hogwarts?', 'Honeydukes', 'Weasley&Weasley', 'Pettichaps', 'Flourish & Blotts');
 
 
-INSERT INTO estudiantes_casas VALUES
-(1,'Gryffindor',0),
-(2,'Hufflepuff',0),
-(3,'Ravenclaw',0),
-(4,'Slytherin',0);
+INSERT INTO `estudiantes_casas` (`id`, `casa`, `numEstudiantes`) VALUES
+(1, 'Gryffindor', 5),
+(2, 'Hufflepuff', 3),
+(3, 'Ravenclaw', 4),
+(4, 'Slytherin', 4);
+
 
 
 

@@ -74,7 +74,7 @@ main{
     text-align: center;
     background-repeat: no-repeat;
     background-image: url("/static/assets/fondoAccordionItem.jpg") ;
-    background-size:1250px;
+    background-size:260%;
     background-position: center ;
     border-radius: 70%;  
     opacity: 0.85;
