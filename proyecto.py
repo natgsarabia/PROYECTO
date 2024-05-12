@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect,url_for, session, flash, send_from_directory
+from flask import Flask,render_template,request,redirect,url_for, session, flash
 import mysql.connector as mysql
 import random
 import matplotlib
