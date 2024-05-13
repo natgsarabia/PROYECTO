@@ -10,17 +10,15 @@ import os
 
 
 def pedirPreguntasTrivialhp(numero_preguntas=10):
-    try:
-        bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                        database="trivialhp")
-        cursor=bd.cursor()
-        cursor.execute("SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp` ORDER BY RAND() LIMIT %s;", (numero_preguntas,))
-        listaPreguntas = cursor.fetchall()
-        cursor.close()
-        bd.close()
-        return listaPreguntas
-    except:
-        return render_template('error.html')
+    bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                    database="trivialhp")
+    cursor=bd.cursor()
+    cursor.execute("SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp` ORDER BY RAND() LIMIT %s;", (numero_preguntas,))
+    listaPreguntas = cursor.fetchall()
+    cursor.close()
+    bd.close()
+    return listaPreguntas
+
     
 def obtenerPreguntaTrivialhp(preguntasRandom):
         pregunta=preguntasRandom[0]
