@@ -10,14 +10,17 @@ import os
 
 
 def pedirPreguntasTrivialhp(numero_preguntas=10):
-    bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                     database="trivialhp")
-    cursor=bd.cursor()
-    cursor.execute("SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp` ORDER BY RAND() LIMIT %s;", (numero_preguntas,))
-    listaPreguntas = cursor.fetchall()
-    cursor.close()
-    bd.close()
-    return listaPreguntas
+    try:
+        bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                        database="trivialhp")
+        cursor=bd.cursor()
+        cursor.execute("SELECT `pregunta`, `respuesta_correcta`, `respuesta_incorrecta1`,` respuesta_incorrecta2`,` respuesta_incorrecta3` FROM `trivial_preguntas_generales_hp` ORDER BY RAND() LIMIT %s;", (numero_preguntas,))
+        listaPreguntas = cursor.fetchall()
+        cursor.close()
+        bd.close()
+        return listaPreguntas
+    except:
+        return render_template('error.html')
     
 def obtenerPreguntaTrivialhp(preguntasRandom):
         pregunta=preguntasRandom[0]
@@ -93,6 +96,10 @@ def generarGraficoTestHP(usuario):
     
     plt.close()
 
+
+
+
+
 app= Flask(__name__)
 app.secret_key='1234'
 
@@ -104,6 +111,9 @@ def cerrarGraficos(exception=None):
 @app.route('/')
 def root():
     return render_template('index.html')
+
+
+# TEST: TRIVIAL HARRY POTTER 
 
 @app.route('/trivialHP',methods=["GET","POST"])
 def trivialHP():
@@ -195,6 +205,8 @@ def mostrarResultados(usuario):
   
     return render_template('resultadoTrivial.html',puntuacion=puntuacion)
 
+
+# TEST ¿A QUÉ CASA PERTENECES? 
     
 @app.route('/testCasas', methods=["GET", "POST"])
 def jugar_test():
@@ -232,44 +244,6 @@ def mostrar_pregunta(listaPreguntas):
     session['pregunta_actual'] = pregunta_actual
     session['index'] += 1
     return render_template('testCasas.html', pregunta=pregunta_actual['pregunta'], opciones_respuestas=opciones_respuestas)
-
-
-   
-
-@app.route('/estudiantesCasas',methods=["GET","POST"])
-def calcularEstudiantes():
-    bd=mysql.connect(user="root",password="",host="127.0.0.1",
-                     database="trivialhp")
-    cursor=bd.cursor()
-    query="SELECT `numEstudiantes`  FROM `estudiantes_casas`;"
-    cursor.execute(query)
-    data=cursor.fetchall()
-    bd.close()
-    fig,ax= plt.subplots(figsize=(10,8))
-   
-    
-    x=['Griffindor','Hufflepuff','Ravenclaw','Slytherin']
-    y=[data[0][0],data[1][0],data[2][0],data[3][0]]
-
-    colores=['#C70039','#ECCB25','#1511C6','#047134']
-    ax.bar(x,y, color=colores)
-
-    fig.set_facecolor('#FcDEBE')
-    ax.set_facecolor('#FcDEBE')
-
-    static_folder = os.path.join(app.root_path, 'static')
-    save_path= os.path.join(static_folder, 'assets','graficoEstudiantesCasas.jpg')
-
-    if os.path.exists(save_path):
-        os.remove(save_path)
-
-    plt.savefig(save_path)
-    plt.close()
-    bd.close()
-
-    
-    
-    return render_template("estudiantesCasas.html")
 
 
 
@@ -316,6 +290,41 @@ def porcentajeCasas():
     return render_template('porcentajeCasas.html', porcentaje_griffindor=porcentaje_griffindor, porcentaje_hufflepuff=porcentaje_hufflepuff, porcentaje_ravenclaw=porcentaje_ravenclaw, porcentaje_slytherin=porcentaje_slytherin)
 
 
+# MOSTRAR ESTUDIANTES HOWGARTS 
 
+@app.route('/estudiantesCasas',methods=["GET","POST"])
+def calcularEstudiantes():
+    bd=mysql.connect(user="root",password="",host="127.0.0.1",
+                     database="trivialhp")
+    cursor=bd.cursor()
+    query="SELECT `numEstudiantes`  FROM `estudiantes_casas`;"
+    cursor.execute(query)
+    data=cursor.fetchall()
+    bd.close()
+    fig,ax= plt.subplots(figsize=(10,8))
+   
+    
+    x=['Griffindor','Hufflepuff','Ravenclaw','Slytherin']
+    y=[data[0][0],data[1][0],data[2][0],data[3][0]]
+
+    colores=['#C70039','#ECCB25','#1511C6','#047134']
+    ax.bar(x,y, color=colores)
+
+    fig.set_facecolor('#FcDEBE')
+    ax.set_facecolor('#FcDEBE')
+
+    static_folder = os.path.join(app.root_path, 'static')
+    save_path= os.path.join(static_folder, 'assets','graficoEstudiantesCasas.jpg')
+
+    if os.path.exists(save_path):
+        os.remove(save_path)
+
+    plt.savefig(save_path)
+    plt.close()
+    bd.close()
+
+    
+    
+    return render_template("estudiantesCasas.html")
 
 app.run(debug=True)
